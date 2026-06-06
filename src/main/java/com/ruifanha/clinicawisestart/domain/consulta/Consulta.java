@@ -20,6 +20,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 // Mapeia a tabela consultas com os relacionamentos principais do agendamento.
+// Usando FetchType.LAZY para otimizar consultas e evitar carregamento desnecessário de dados relacionados.
 @Entity
 @Table(name = "consultas")
 public class Consulta {
