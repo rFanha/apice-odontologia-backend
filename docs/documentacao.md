@@ -165,71 +165,71 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Tabela `pacientes`
 
-23. [ ] Campo `id` criado como chave primaria com auto incremento.
+23. [X] Campo `id` criado como chave primaria com auto incremento.
 
-24. [ ] Campo `nome` criado como texto obrigatorio.
+24. [X] Campo `nome` criado como texto obrigatorio.
 
-25. [ ] Campo `email` criado como texto unico e obrigatorio.
+25. [X] Campo `email` criado como texto unico e obrigatorio.
 
-26. [ ] Campo `cpf` criado como texto unico e obrigatorio.
+26. [X] Campo `cpf` criado como texto unico e obrigatorio.
 
-27. [ ] Campo `data_criacao` criado como data e hora do registro.
+27. [X] Campo `data_criacao` criado como data e hora do registro.
 
-28. [ ] Campo `telefone` criado como texto ou numero.
+28. [X] Campo `telefone` criado como texto ou numero.
 
 ### Tabela `dentistas`
 
-29. [ ] Campo `id` criado como chave primaria com auto incremento.
+29. [X] Campo `id` criado como chave primaria com auto incremento.
 
-30. [ ] Campo `nome` criado como texto obrigatorio.
+30. [X] Campo `nome` criado como texto obrigatorio.
 
-31. [ ] Campo `cpf` criado como texto unico e obrigatorio.
+31. [X] Campo `cpf` criado como texto unico e obrigatorio.
 
-32. [ ] Campo `email` criado como texto unico e obrigatorio.
+32. [X] Campo `email` criado como texto unico e obrigatorio.
 
-33. [ ] Campo `cro` criado como texto obrigatorio.
+33. [X] Campo `cro` criado como texto obrigatorio.
 
-34. [ ] Campo `data_criacao` criado como data e hora do registro.
+34. [X] Campo `data_criacao` criado como data e hora do registro.
 
-35. [ ] Campo `ativo` criado para indicar se o dentista esta ativo.
+35. [X] Campo `ativo` criado para indicar se o dentista esta ativo.
 
 ### Tabela `especialidades`
 
-36. [ ] Campo `id` criado como chave primaria com auto incremento.
+36. [X] Campo `id` criado como chave primaria com auto incremento.
 
-37. [ ] Campo `nome` criado como texto obrigatorio.
+37. [X] Campo `nome` criado como texto obrigatorio.
 
 ### Tabela `dentista_especialidade`
 
-38. [ ] Campo `id` criado como chave primaria com auto incremento.
+38. [X] Campo `id` criado como chave primaria com auto incremento.
 
-39. [ ] Campo `id_dentista` criado como chave estrangeira para `dentistas`.
+39. [X] Campo `id_dentista` criado como chave estrangeira para `dentistas`.
 
-40. [ ] Campo `id_especialidade` criado como chave estrangeira para `especialidades`.
+40. [X] Campo `id_especialidade` criado como chave estrangeira para `especialidades`.
 
-41. [ ] Relacionamento muitos-para-muitos entre dentistas e especialidades implementado.
+41. [X] Relacionamento muitos-para-muitos entre dentistas e especialidades implementado.
 
 ### Tabela `consultas`
 
-42. [ ] Campo `id` criado como chave primaria com auto incremento.
+42. [X] Campo `id` criado como chave primaria com auto incremento.
 
-43. [ ] Campo `id_paciente` criado como chave estrangeira para `pacientes`.
+43. [X] Campo `id_paciente` criado como chave estrangeira para `pacientes`.
 
-44. [ ] Campo `id_dentista` criado como chave estrangeira para `dentistas`.
+44. [X] Campo `id_dentista` criado como chave estrangeira para `dentistas`.
 
-45. [ ] Campo `id_usuario` criado como chave estrangeira para `usuarios`, indicando quem marcou a consulta.
+45. [X] Campo `id_usuario` criado como chave estrangeira para `usuarios`, indicando quem marcou a consulta.
 
-46. [ ] Campo `descricao` criado como texto obrigatorio.
+46. [X] Campo `descricao` criado como texto obrigatorio.
 
-47. [ ] Campo `motivo_cancelamento` criado como texto opcional, obrigatorio quando `status = CANCELADA`.
+47. [X] Campo `motivo_cancelamento` criado como texto opcional, obrigatorio quando `status = CANCELADA`.
 
-48. [ ] Campo `data_inicio` criado como data e hora obrigatoria.
+48. [X] Campo `data_inicio` criado como data e hora obrigatoria.
 
-49. [ ] Campo `data_fim` criado como data e hora obrigatoria.
+49. [X] Campo `data_fim` criado como data e hora obrigatoria.
 
-50. [ ] Campo `data_registro` criado como data e hora em que a consulta foi marcada.
+50. [X] Campo `data_registro` criado como data e hora em que a consulta foi marcada.
 
-51. [ ] Campo `status` criado como texto, por exemplo `AGENDADA`, `CANCELADA` ou `FINALIZADA`.
+51. [X] Campo `status` criado como texto, por exemplo `AGENDADA`, `CANCELADA` ou `FINALIZADA`.
 
 ### Scripts SQL
 
