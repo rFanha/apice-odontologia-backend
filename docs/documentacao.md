@@ -4,7 +4,7 @@
 
 **Ápice Odontologia**
 
-## Como Vamos Estudar e Desenvolver 
+## Como Vamos Estudar e Desenvolver .
 
 Este documento será usado como guia de estudo do projeto, avançando item por item.
 
