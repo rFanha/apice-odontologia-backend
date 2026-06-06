@@ -113,31 +113,31 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ## Identificacao do Projeto
 
-1. [ ] Nome do sistema definido.
+1. [X] Nome do sistema definido.
 
-2. [ ] Identidade de marca criada.
+2. [X] Identidade de marca criada.
 
-3. [ ] Logotipo criado.
+3. [X] Logotipo criado.
 
-4. [ ] Paleta de cores definida.
+4. [X] Paleta de cores definida.
 
 5. [ ] Repositorio GitHub do front-end Angular criado.
 
 6. [ ] Repositorio GitHub do back-end Java Spring Boot criado.
 
-7. [ ] Banco relacional configurado.
+7. [X] Banco relacional configurado.
 
-8. [ ] Banco criado com o nome `sistema_gestao_consultas`.
+8. [X] Banco criado com o nome `sistema_gestao_consultas`.
 
 ## Tecnologias Obrigatorias
 
 9. [ ] Frontend desenvolvido com Angular 19 ou superior.
 
-10. [ ] Backend desenvolvido com Java Spring Boot REST.
+10. [X] Backend desenvolvido com Java Spring Boot REST.
 
-11. [ ] Banco de dados relacional usado no projeto.
+11. [X] Banco de dados relacional usado no projeto.
 
-12. [ ] Versionamento colaborativo usando Git/GitHub.
+12. [X] Versionamento colaborativo usando Git/GitHub.
 
 13. [ ] API integrada com o front-end.
 
@@ -145,23 +145,23 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Tabela `usuarios`
 
-14. [ ] Campo `id` criado como chave primaria com auto incremento.
+14. [X] Campo `id` criado como chave primaria com auto incremento.
 
-15. [ ] Campo `nome` criado como texto obrigatorio.
+15. [X] Campo `nome` criado como texto obrigatorio.
 
-16. [ ] Campo `cpf` criado como texto unico e obrigatorio.
+16. [X] Campo `cpf` criado como texto unico e obrigatorio.
 
-17. [ ] Campo `email` criado como texto unico e obrigatorio.
+17. [X] Campo `email` criado como texto unico e obrigatorio.
 
 18. [ ] Campo `senha` criado como texto obrigatorio, armazenado com hash usando BCrypt ou alternativa segura.
 
-19. [ ] Campo `data_criacao` criado como data e hora do registro.
+19. [X] Campo `data_criacao` criado como data e hora do registro.
 
-20. [ ] Campo `ultimo_login` criado como data e hora do ultimo acesso.
+20. [X] Campo `ultimo_login` criado como data e hora do ultimo acesso.
 
-21. [ ] Campo `perfil` criado como texto, por exemplo `ADMIN` ou `DENTISTA`.
+21. [X] Campo `perfil` criado como texto, por exemplo `ADMIN` ou `DENTISTA`.
 
-22. [ ] Campo `ativo` criado para indicar se o usuario esta ativo.
+22. [X] Campo `ativo` criado para indicar se o usuario esta ativo.
 
 ### Tabela `pacientes`
 
@@ -269,13 +269,13 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 66. [ ] `pom.xml` ou `build.gradle` configurado.
 
-67. [ ] Dependencia Spring Data JPA adicionada.
+67. [X] Dependencia Spring Data JPA adicionada.
 
-68. [ ] Driver Postgres, MySQL ou outro banco relacional adicionado.
+68. [X] Driver Postgres, MySQL ou outro banco relacional adicionado.
 
 69. [ ] Dependencia Spring Security adicionada.
 
-70. [ ] Configuracao de conexao com banco adicionada.
+70. [X] Configuracao de conexao com banco adicionada.
 
 ### Entidades JPA/Hibernate
 
