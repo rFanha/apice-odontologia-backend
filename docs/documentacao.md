@@ -241,7 +241,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ## Regras de Negocio Obrigatorias
 
-55. [ ] Nao permitir conflito de horario para o mesmo dentista.
+55. [X] Nao permitir conflito de horario para o mesmo dentista.
 
 56. [ ] Nao permitir agendamento em datas passadas.
 
@@ -301,7 +301,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 80. [ ] `EspecialidadeRepository` criado.
 
-81. [ ] `ConsultaRepository` criado.
+81. [X] `ConsultaRepository` criado.
 
 ### Services
 
@@ -313,7 +313,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 85. [ ] `EspecialidadeService` criado.
 
-86. [ ] `ConsultaService` criado.
+86. [X] `ConsultaService` criado.
 
 87. [ ] Regras de negocio implementadas nos services.
 

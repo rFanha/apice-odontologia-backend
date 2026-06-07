@@ -4,6 +4,16 @@
 
 `org.springframework.boot.autoconfigure.SpringBootApplication`: marca a classe principal e habilita a configuracao automatica do Spring Boot.
 
+`org.springframework.data.jpa.repository.JpaRepository`: fornece operacoes prontas de banco, como salvar, buscar e excluir entidades.
+
+`org.springframework.data.jpa.repository.Query`: permite escrever uma consulta JPQL personalizada no repository.
+
+`org.springframework.data.repository.query.Param`: liga parametros Java aos nomes usados dentro da query.
+
+`org.springframework.stereotype.Service`: marca uma classe como service para o Spring gerenciar como componente de regra de negocio.
+
+`org.springframework.transaction.annotation.Transactional`: executa o metodo dentro de uma transacao de banco.
+
 `java.time.LocalDateTime`: representa data e hora sem fuso horario, usada em campos como criacao, login e horarios de consulta.
 
 `java.util.ArrayList`: cria listas mutaveis usadas para iniciar colecoes de relacionamentos.
@@ -11,6 +21,8 @@
 `java.util.List`: define colecoes de objetos, como especialidades de um dentista.
 
 `com.ruifanha.clinicawisestart.domain.consulta.StatusConsulta`: enum interno que define os status possiveis de uma consulta.
+
+`com.ruifanha.clinicawisestart.domain.consulta.Consulta`: entidade usada para salvar e consultar agendamentos odontologicos.
 
 `com.ruifanha.clinicawisestart.domain.dentista.Dentista`: entidade usada para relacionar consultas e especialidades com dentistas.
 
@@ -21,6 +33,8 @@
 `com.ruifanha.clinicawisestart.domain.paciente.Paciente`: entidade usada para relacionar consultas com pacientes.
 
 `com.ruifanha.clinicawisestart.domain.usuario.Usuario`: entidade usada para registrar qual usuario marcou uma consulta.
+
+`com.ruifanha.clinicawisestart.repository.ConsultaRepository`: repository usado pelo service para acessar dados de consultas.
 
 `jakarta.persistence.Column`: configura detalhes de uma coluna, como obrigatoriedade, nome e unicidade.
 
