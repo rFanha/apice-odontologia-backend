@@ -241,25 +241,25 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ## Regras de Negocio Obrigatorias
 
-55. [ ] Nao permitir conflito de horario para o mesmo dentista.
+55. [X] Nao permitir conflito de horario para o mesmo dentista.
 
-56. [ ] Nao permitir agendamento em datas passadas.
+56. [X] Nao permitir agendamento em datas passadas.
 
-57. [ ] Exigir motivo para cancelar consultas.
+57. [X] Exigir motivo para cancelar consultas.
 
-58. [ ] Permitir que um dentista tenha varias especialidades.
+58. [X] Permitir que um dentista tenha varias especialidades.
 
-59. [ ] Permitir que uma especialidade pertenca a varios dentistas.
+59. [X] Permitir que uma especialidade pertenca a varios dentistas.
 
-60. [ ] Permitir que somente o perfil `ADMIN` gerencie usuarios.
+60. [X] Permitir que somente o perfil `ADMIN` gerencie usuarios.
 
-61. [ ] Bloquear outros perfis de gerenciarem usuarios.
+61. [X] Bloquear outros perfis de gerenciarem usuarios.
 
-62. [ ] Permitir que dentista veja somente as consultas relacionadas a ele.
+62. [X] Permitir que dentista veja somente as consultas relacionadas a ele.
 
-63. [ ] Permitir que perfil `ADMIN` veja todas as consultas do sistema.
+63. [X] Permitir que perfil `ADMIN` veja todas as consultas do sistema.
 
-64. [ ] Validar que `data_fim` seja posterior a `data_inicio`.
+64. [X] Validar que `data_fim` seja posterior a `data_inicio`.
 
 ## Back-End Java Spring Boot
 
@@ -301,11 +301,11 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 80. [ ] `EspecialidadeRepository` criado.
 
-81. [ ] `ConsultaRepository` criado.
+81. [X] `ConsultaRepository` criado.
 
 ### Services
 
-82. [ ] `UsuarioService` criado.
+82. [X] `UsuarioService` criado.
 
 83. [ ] `PacienteService` criado.
 
@@ -313,9 +313,9 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 85. [ ] `EspecialidadeService` criado.
 
-86. [ ] `ConsultaService` criado.
+86. [X] `ConsultaService` criado.
 
-87. [ ] Regras de negocio implementadas nos services.
+87. [X] Regras de negocio implementadas nos services.
 
 ### Endpoints Obrigatorios
 
