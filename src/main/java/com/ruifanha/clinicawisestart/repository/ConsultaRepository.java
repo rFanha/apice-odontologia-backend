@@ -1,6 +1,7 @@
 package com.ruifanha.clinicawisestart.repository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,9 @@ import com.ruifanha.clinicawisestart.domain.consulta.StatusConsulta;
 
 // Repository criado para centralizar o acesso ao banco das consultas.
 public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
+
+	// Busca somente as consultas vinculadas ao dentista informado.
+	List<Consulta> findByDentistaId(Long dentistaId);
 
 	// Verifica se ja existe consulta ativa no mesmo intervalo para o dentista.
 	@Query("""

@@ -32,6 +32,8 @@
 
 `com.ruifanha.clinicawisestart.domain.paciente.Paciente`: entidade usada para relacionar consultas com pacientes.
 
+`com.ruifanha.clinicawisestart.domain.usuario.PerfilUsuario`: enum usado para validar permissoes de acesso por perfil.
+
 `com.ruifanha.clinicawisestart.domain.usuario.Usuario`: entidade usada para registrar qual usuario marcou uma consulta.
 
 `com.ruifanha.clinicawisestart.repository.ConsultaRepository`: repository usado pelo service para acessar dados de consultas.
