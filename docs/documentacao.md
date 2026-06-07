@@ -233,11 +233,11 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Scripts SQL
 
-52. [ ] Script DDL criado para inicializacao das tabelas.
+52. [X] Script DDL criado para inicializacao das tabelas.
 
-53. [ ] Script DML criado com dados de exemplo.
+53. [X] Script DML criado com dados de exemplo.
 
-54. [ ] Scripts SQL versionados no repositorio da API.
+54. [X] Scripts SQL versionados no repositorio da API.
 
 ## Regras de Negocio Obrigatorias
 
