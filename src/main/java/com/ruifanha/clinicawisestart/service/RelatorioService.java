@@ -1,5 +1,7 @@
 package com.ruifanha.clinicawisestart.service;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,16 +34,52 @@ public class RelatorioService {
 	}
 
 	@Transactional(readOnly = true)
-	public DashboardResponse buscarDashboard(Long usuarioId, Long pacienteId) {
+	public DashboardResponse buscarDashboard(
+		Long usuarioId,
+		Long pacienteId,
+		Long especialidadeId,
+		LocalDateTime dataInicio,
+		LocalDateTime dataFim
+	) {
 		// Resume os principais indicadores, aplicando filtros informados.
+		validarPeriodo(dataInicio, dataFim);
+
 		return new DashboardResponse(
-			consultaRepository.countRelatorio(usuarioId, pacienteId),
-			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.AGENDADA),
-			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.CANCELADA),
-			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.FINALIZADA),
+			consultaRepository.countRelatorio(usuarioId, pacienteId, especialidadeId, dataInicio, dataFim),
+			consultaRepository.countRelatorioPorStatus(
+				usuarioId,
+				pacienteId,
+				especialidadeId,
+				dataInicio,
+				dataFim,
+				StatusConsulta.AGENDADA
+			),
+			consultaRepository.countRelatorioPorStatus(
+				usuarioId,
+				pacienteId,
+				especialidadeId,
+				dataInicio,
+				dataFim,
+				StatusConsulta.CANCELADA
+			),
+			consultaRepository.countRelatorioPorStatus(
+				usuarioId,
+				pacienteId,
+				especialidadeId,
+				dataInicio,
+				dataFim,
+				StatusConsulta.FINALIZADA
+			),
 			pacienteRepository.count(),
 			dentistaRepository.count(),
 			especialidadeRepository.count()
 		);
+	}
+
+	private void validarPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim) {
+		// Garante que o periodo informado no relatorio seja coerente.
+		if (dataInicio != null && dataFim != null && dataFim.isBefore(dataInicio)) {
+			throw new IllegalArgumentException("Data final do relatorio deve ser posterior a data inicial.");
+		}
 	}
 }

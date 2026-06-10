@@ -1,6 +1,9 @@
 package com.ruifanha.clinicawisestart.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,8 +27,11 @@ public class RelatorioController {
 	@GetMapping("/dashboard")
 	public DashboardResponse buscarDashboard(
 		@RequestParam(required = false) Long usuarioId,
-		@RequestParam(required = false) Long pacienteId
+		@RequestParam(required = false) Long pacienteId,
+		@RequestParam(required = false) Long especialidadeId,
+		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataInicio,
+		@RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFim
 	) {
-		return relatorioService.buscarDashboard(usuarioId, pacienteId);
+		return relatorioService.buscarDashboard(usuarioId, pacienteId, especialidadeId, dataInicio, dataFim);
 	}
 }

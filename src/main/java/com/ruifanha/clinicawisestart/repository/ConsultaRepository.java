@@ -21,27 +21,41 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 
 	// Conta consultas aplicando filtros opcionais de relatorio.
 	@Query("""
-		SELECT COUNT(c)
+		SELECT COUNT(DISTINCT c)
 		FROM Consulta c
+		LEFT JOIN c.dentista.especialidades de
 		WHERE (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
 		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
+		AND (:especialidadeId IS NULL OR de.especialidade.id = :especialidadeId)
+		AND (CAST(:dataInicio AS java.time.LocalDateTime) IS NULL OR c.dataInicio >= :dataInicio)
+		AND (CAST(:dataFim AS java.time.LocalDateTime) IS NULL OR c.dataInicio <= :dataFim)
 	""")
 	long countRelatorio(
 		@Param("usuarioId") Long usuarioId,
-		@Param("pacienteId") Long pacienteId
+		@Param("pacienteId") Long pacienteId,
+		@Param("especialidadeId") Long especialidadeId,
+		@Param("dataInicio") LocalDateTime dataInicio,
+		@Param("dataFim") LocalDateTime dataFim
 	);
 
 	// Conta consultas por status aplicando filtros opcionais de relatorio.
 	@Query("""
-		SELECT COUNT(c)
+		SELECT COUNT(DISTINCT c)
 		FROM Consulta c
+		LEFT JOIN c.dentista.especialidades de
 		WHERE c.status = :status
 		AND (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
 		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
+		AND (:especialidadeId IS NULL OR de.especialidade.id = :especialidadeId)
+		AND (CAST(:dataInicio AS java.time.LocalDateTime) IS NULL OR c.dataInicio >= :dataInicio)
+		AND (CAST(:dataFim AS java.time.LocalDateTime) IS NULL OR c.dataInicio <= :dataFim)
 	""")
 	long countRelatorioPorStatus(
 		@Param("usuarioId") Long usuarioId,
 		@Param("pacienteId") Long pacienteId,
+		@Param("especialidadeId") Long especialidadeId,
+		@Param("dataInicio") LocalDateTime dataInicio,
+		@Param("dataFim") LocalDateTime dataFim,
 		@Param("status") StatusConsulta status
 	);
 

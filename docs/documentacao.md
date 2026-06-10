@@ -339,9 +339,9 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 97. [X] Filtro por paciente implementado em relatorios.
 
-98. [ ] Filtro por especialidade implementado em relatorios.
+98. [X] Filtro por especialidade implementado em relatorios.
 
-99. [ ] Filtro por data implementado em relatorios.
+99. [X] Filtro por data implementado em relatorios.
 
 ### Seguranca
 
