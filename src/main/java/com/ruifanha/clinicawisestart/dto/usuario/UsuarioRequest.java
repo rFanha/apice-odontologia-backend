@@ -2,6 +2,7 @@ package com.ruifanha.clinicawisestart.dto.usuario;
 
 import com.ruifanha.clinicawisestart.domain.usuario.PerfilUsuario;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -17,6 +18,7 @@ public record UsuarioRequest(
 	String cpf,
 
 	@NotBlank(message = "Email e obrigatorio.")
+	@Email(message = "Email deve ter um formato valido.")
 	@Size(max = 255, message = "Email deve ter no maximo 255 caracteres.")
 	String email,
 

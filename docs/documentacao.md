@@ -365,11 +365,11 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 108. [X] Tamanho de campos validado com anotacoes como `@Size`.
 
-109. [ ] E-mails validados com `@Email`.
+109. [X] E-mails validados com `@Email`.
 
-110. [ ] Regras de data e horario validadas.
+110. [X] Regras de data e horario validadas.
 
-111. [ ] Respostas de erro padronizadas.
+111. [X] Respostas de erro padronizadas.
 
 ### Testes e Documentacao do Back-End
 

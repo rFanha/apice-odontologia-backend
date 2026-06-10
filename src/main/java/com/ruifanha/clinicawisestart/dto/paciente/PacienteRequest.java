@@ -1,5 +1,6 @@
 package com.ruifanha.clinicawisestart.dto.paciente;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -10,6 +11,7 @@ public record PacienteRequest(
 	String nome,
 
 	@NotBlank(message = "Email e obrigatorio.")
+	@Email(message = "Email deve ter um formato valido.")
 	@Size(max = 255, message = "Email deve ter no maximo 255 caracteres.")
 	String email,
 
