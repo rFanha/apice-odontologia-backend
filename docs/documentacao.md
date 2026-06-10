@@ -123,7 +123,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 5. [ ] Repositorio GitHub do front-end Angular criado.
 
-6. [ ] Repositorio GitHub do back-end Java Spring Boot criado.
+6. [X] Repositorio GitHub do back-end Java Spring Boot criado.
 
 7. [X] Banco relacional configurado.
 
@@ -153,7 +153,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 17. [X] Campo `email` criado como texto unico e obrigatorio.
 
-18. [ ] Campo `senha` criado como texto obrigatorio, armazenado com hash usando BCrypt ou alternativa segura.
+18. [X] Campo `senha` criado como texto obrigatorio, armazenado com hash usando BCrypt ou alternativa segura.
 
 19. [X] Campo `data_criacao` criado como data e hora do registro.
 
@@ -265,9 +265,9 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Configuracao Inicial
 
-65. [ ] Projeto Spring Boot iniciado.
+65. [X] Projeto Spring Boot iniciado.
 
-66. [ ] `pom.xml` ou `build.gradle` configurado.
+66. [X] `pom.xml` ou `build.gradle` configurado.
 
 67. [X] Dependencia Spring Data JPA adicionada.
 
@@ -521,21 +521,21 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 177. [ ] README do front-end criado com instrucoes de execucao.
 
-178. [ ] README do back-end criado com instrucoes de instalacao.
+178. [X] README do back-end criado com instrucoes de instalacao.
 
-179. [ ] README do back-end criado com instrucoes de execucao.
+179. [X] README do back-end criado com instrucoes de execucao.
 
-180. [ ] Variaveis de ambiente documentadas.
+180. [X] Variaveis de ambiente documentadas.
 
-181. [ ] Endpoints documentados com metodo HTTP.
+181. [X] Endpoints documentados com metodo HTTP.
 
-182. [ ] Endpoints documentados com path.
+182. [X] Endpoints documentados com path.
 
-183. [ ] Endpoints documentados com parametros.
+183. [X] Endpoints documentados com parametros.
 
-184. [ ] Endpoints documentados com corpo da requisicao.
+184. [X] Endpoints documentados com corpo da requisicao.
 
-185. [ ] Endpoints documentados com exemplos de resposta.
+185. [X] Endpoints documentados com exemplos de resposta.
 
 186. [ ] Guia de uso do sistema criado.
 
@@ -621,11 +621,11 @@ Use os status abaixo para atualizar este documento conforme o projeto evoluir:
 
 220. [ ] Usar Flyway ou Liquibase para versionamento profissional do banco de dados.
 
-221. [ ] Criar DTOs para entrada e saida de dados, evitando expor entidades diretamente.
+221. [X] Criar DTOs para entrada e saida de dados, evitando expor entidades diretamente.
 
-222. [ ] Criar tratamento global de excecoes com `@ControllerAdvice`.
+222. [X] Criar tratamento global de excecoes com `@ControllerAdvice`.
 
-223. [ ] Padronizar respostas de erro com codigo, mensagem e detalhes.
+223. [X] Padronizar respostas de erro com codigo, mensagem e detalhes.
 
 224. [ ] Adicionar Swagger/OpenAPI para documentacao automatica da API.
 
@@ -705,13 +705,13 @@ Use os status abaixo para atualizar este documento conforme o projeto evoluir:
 
 262. [ ] Criar indices para campos pesquisados com frequencia, como `cpf`, `email`, `data_inicio` e `status`.
 
-263. [ ] Criar constraints para evitar dados duplicados.
+263. [X] Criar constraints para evitar dados duplicados.
 
-264. [ ] Criar constraints para status permitidos.
+264. [X] Criar constraints para status permitidos.
 
 265. [ ] Criar integridade referencial com `ON DELETE` e `ON UPDATE` planejados.
 
-266. [ ] Criar dados iniciais para perfis, especialidades e usuario administrador.
+266. [X] Criar dados iniciais para perfis, especialidades e usuario administrador.
 
 267. [ ] Criar Dockerfile para o back-end.
 
@@ -733,7 +733,7 @@ Use os status abaixo para atualizar este documento conforme o projeto evoluir:
 
 276. [ ] Criar diagrama de arquitetura.
 
-277. [ ] Criar colecao Postman ou Insomnia versionada.
+277. [X] Criar colecao Postman ou Insomnia versionada.
 
 278. [ ] Criar roteiro de apresentacao.
 
@@ -743,17 +743,17 @@ Use os status abaixo para atualizar este documento conforme o projeto evoluir:
 
 281. [ ] Configurar CORS apenas para origens permitidas.
 
-282. [ ] Evitar retorno de dados sensiveis, como senha ou hash.
+282. [X] Evitar retorno de dados sensiveis, como senha ou hash.
 
 283. [ ] Implementar bloqueio temporario apos muitas tentativas de login.
 
 284. [ ] Implementar politica de senha minima.
 
-285. [ ] Usar variaveis de ambiente para segredos, credenciais e chaves JWT.
+285. [X] Usar variaveis de ambiente para segredos, credenciais e chaves JWT.
 
-286. [ ] Criar mensagens claras para conflitos de horario.
+286. [X] Criar mensagens claras para conflitos de horario.
 
-287. [ ] Criar mensagens claras para falta de permissao.
+287. [X] Criar mensagens claras para falta de permissao.
 
 288. [ ] Criar busca rapida de paciente e dentista ao marcar consulta.
 

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ruifanha.clinicawisestart.domain.consulta.Consulta;
 import com.ruifanha.clinicawisestart.domain.consulta.StatusConsulta;
+import com.ruifanha.clinicawisestart.domain.dentista.Dentista;
 import com.ruifanha.clinicawisestart.domain.usuario.PerfilUsuario;
 import com.ruifanha.clinicawisestart.domain.usuario.Usuario;
 import com.ruifanha.clinicawisestart.dto.consulta.CancelamentoConsultaRequest;
@@ -52,6 +53,7 @@ public class ConsultaService {
 		validarPermissaoGerenciarConsultas(usuarioLogado);
 
 		Consulta consulta = buscarPorId(id);
+		validarConsultaPertenceAoDentistaLogado(usuarioLogado, consulta);
 		aplicarDados(consulta, usuarioLogado, consultaRequest, false);
 		return salvar(consulta);
 	}
@@ -61,6 +63,7 @@ public class ConsultaService {
 		validarPermissaoGerenciarConsultas(usuarioLogado);
 
 		Consulta consulta = buscarPorId(id);
+		validarConsultaPertenceAoDentistaLogado(usuarioLogado, consulta);
 		validarCancelamentoPermitido(consulta);
 
 		if (cancelamentoRequest == null || cancelamentoRequest.motivoCancelamento() == null
@@ -93,9 +96,12 @@ public class ConsultaService {
 	public List<Consulta> listar(Usuario usuarioLogado, Long dentistaId) {
 		validarPermissaoGerenciarConsultas(usuarioLogado);
 
-		// Usuarios DENTISTA devem consultar a agenda filtrada por dentista.
-		if (PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil()) && dentistaId == null) {
-			throw new IllegalArgumentException("Usuarios DENTISTA devem informar dentistaId para listar consultas.");
+		if (PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil())) {
+			Long dentistaLogadoId = buscarDentistaLogado(usuarioLogado).getId();
+			if (dentistaId != null && !dentistaLogadoId.equals(dentistaId)) {
+				throw new IllegalArgumentException("Dentista pode visualizar apenas as proprias consultas.");
+			}
+			return listarPorDentista(dentistaLogadoId);
 		}
 		if (dentistaId != null) {
 			return listarPorDentista(dentistaId);
@@ -106,7 +112,9 @@ public class ConsultaService {
 	@Transactional(readOnly = true)
 	public Consulta buscarPorId(Usuario usuarioLogado, Long id) {
 		validarPermissaoGerenciarConsultas(usuarioLogado);
-		return buscarPorId(id);
+		Consulta consulta = buscarPorId(id);
+		validarConsultaPertenceAoDentistaLogado(usuarioLogado, consulta);
+		return consulta;
 	}
 
 	@Transactional(readOnly = true)
@@ -132,6 +140,7 @@ public class ConsultaService {
 
 		// Confirma que a consulta existe antes de solicitar a exclusao.
 		Consulta consulta = buscarPorId(id);
+		validarConsultaPertenceAoDentistaLogado(usuarioLogado, consulta);
 		consultaRepository.delete(consulta);
 	}
 
@@ -167,6 +176,7 @@ public class ConsultaService {
 		if (consultaRequest.dentistaId() == null) {
 			throw new IllegalArgumentException("Dentista e obrigatorio.");
 		}
+		validarDentistaPermitidoNoRequest(usuarioLogado, consultaRequest.dentistaId());
 
 		consulta.setPaciente(pacienteRepository.findById(consultaRequest.pacienteId())
 			.orElseThrow(() -> new IllegalArgumentException("Paciente nao encontrado.")));
@@ -237,5 +247,36 @@ public class ConsultaService {
 		if (existeConflito) {
 			throw new IllegalArgumentException("Dentista ja possui consulta nesse horario.");
 		}
+	}
+
+	private void validarDentistaPermitidoNoRequest(Usuario usuarioLogado, Long dentistaId) {
+		if (!PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil())) {
+			return;
+		}
+
+		Long dentistaLogadoId = buscarDentistaLogado(usuarioLogado).getId();
+		if (!dentistaLogadoId.equals(dentistaId)) {
+			throw new IllegalArgumentException("Dentista pode gerenciar apenas as proprias consultas.");
+		}
+	}
+
+	private void validarConsultaPertenceAoDentistaLogado(Usuario usuarioLogado, Consulta consulta) {
+		if (!PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil())) {
+			return;
+		}
+
+		Long dentistaLogadoId = buscarDentistaLogado(usuarioLogado).getId();
+		if (!dentistaLogadoId.equals(consulta.getDentista().getId())) {
+			throw new IllegalArgumentException("Dentista pode gerenciar apenas as proprias consultas.");
+		}
+	}
+
+	private Dentista buscarDentistaLogado(Usuario usuarioLogado) {
+		if (usuarioLogado.getCpf() == null || usuarioLogado.getCpf().isBlank()) {
+			throw new IllegalArgumentException("Dentista autenticado precisa ter CPF vinculado.");
+		}
+
+		return dentistaRepository.findByCpf(usuarioLogado.getCpf())
+			.orElseThrow(() -> new IllegalArgumentException("Dentista autenticado nao possui cadastro vinculado."));
 	}
 }
