@@ -319,7 +319,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Endpoints Obrigatorios
 
-88. [ ] Endpoints de autenticacao implementados.
+88. [X] Endpoints de autenticacao implementados.
 
 89. [ ] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
 
