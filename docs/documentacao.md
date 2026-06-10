@@ -373,15 +373,15 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Testes e Documentacao do Back-End
 
-112. [ ] Endpoints testados com Postman ou Insomnia.
+112. [X] Endpoints testados com Postman ou Insomnia.
 
-113. [ ] Rotas documentadas no repositorio do back-end.
+113. [X] Rotas documentadas no repositorio do back-end.
 
-114. [ ] Exemplos de requisicoes documentados.
+114. [X] Exemplos de requisicoes documentados.
 
-115. [ ] Exemplos de respostas documentados.
+115. [X] Exemplos de respostas documentados.
 
-116. [ ] Instrucoes de configuracao e execucao do back-end documentadas.
+116. [X] Instrucoes de configuracao e execucao do back-end documentadas.
 
 ## Front-End Angular
 
