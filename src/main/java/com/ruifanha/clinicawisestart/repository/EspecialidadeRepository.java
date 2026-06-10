@@ -13,6 +13,9 @@ public interface EspecialidadeRepository extends JpaRepository<Especialidade, Lo
 	// Busca especialidade pelo nome exato para apoiar validacoes de cadastro.
 	Optional<Especialidade> findByNome(String nome);
 
+	// Busca a primeira especialidade com este nome para validar duplicidade mesmo se ja houver dados repetidos.
+	Optional<Especialidade> findFirstByNomeIgnoreCaseOrderByIdAsc(String nome);
+
 	// Busca especialidades por parte do nome, ignorando maiusculas e minusculas.
 	List<Especialidade> findByNomeContainingIgnoreCase(String nome);
 

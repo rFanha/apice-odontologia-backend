@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -81,6 +82,20 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(status).body(criarResposta(
 			status,
 			"Acesso negado.",
+			request.getRequestURI(),
+			Map.of()
+		));
+	}
+
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<ErroResponse> tratarViolacaoIntegridade(
+		DataIntegrityViolationException exception,
+		HttpServletRequest request
+	) {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		return ResponseEntity.status(status).body(criarResposta(
+			status,
+			"Registro ja existe ou viola uma regra de integridade do banco.",
 			request.getRequestURI(),
 			Map.of()
 		));
