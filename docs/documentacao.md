@@ -327,7 +327,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 91. [X] Endpoints de dentistas implementados.
 
-92. [ ] Endpoints de especialidades implementados.
+92. [X] Endpoints de especialidades implementados.
 
 93. [ ] Endpoints de consultas implementados.
 
