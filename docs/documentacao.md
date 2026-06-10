@@ -333,7 +333,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 94. [X] Endpoint de cancelamento de consultas implementado.
 
-95. [ ] Endpoints de relatorios filtrados ou dashboard implementados.
+95. [X] Endpoints de relatorios filtrados ou dashboard implementados.
 
 96. [ ] Filtro por usuario implementado em relatorios.
 

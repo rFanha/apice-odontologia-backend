@@ -16,6 +16,9 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	// Busca somente as consultas vinculadas ao dentista informado.
 	List<Consulta> findByDentistaId(Long dentistaId);
 
+	// Conta consultas por status para montar indicadores do dashboard.
+	long countByStatus(StatusConsulta status);
+
 	// Verifica se ja existe consulta ativa no mesmo intervalo para o dentista.
 	@Query("""
 		SELECT COUNT(c) > 0
