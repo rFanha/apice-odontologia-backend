@@ -19,6 +19,8 @@ import com.ruifanha.clinicawisestart.dto.especialidade.EspecialidadeRequest;
 import com.ruifanha.clinicawisestart.dto.especialidade.EspecialidadeResponse;
 import com.ruifanha.clinicawisestart.service.EspecialidadeService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor o CRUD de especialidades.
 @RestController
 @RequestMapping("/especialidades")
@@ -49,7 +51,7 @@ public class EspecialidadeController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EspecialidadeResponse criar(@RequestBody EspecialidadeRequest especialidadeRequest) {
+	public EspecialidadeResponse criar(@Valid @RequestBody EspecialidadeRequest especialidadeRequest) {
 		try {
 			return EspecialidadeResponse.fromEntity(especialidadeService.criar(especialidadeRequest));
 		} catch (IllegalArgumentException exception) {
@@ -60,7 +62,7 @@ public class EspecialidadeController {
 	@PutMapping("/{id}")
 	public EspecialidadeResponse atualizar(
 		@PathVariable Long id,
-		@RequestBody EspecialidadeRequest especialidadeRequest
+		@Valid @RequestBody EspecialidadeRequest especialidadeRequest
 	) {
 		try {
 			return EspecialidadeResponse.fromEntity(especialidadeService.atualizar(id, especialidadeRequest));

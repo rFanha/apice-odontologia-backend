@@ -12,6 +12,8 @@ import com.ruifanha.clinicawisestart.dto.autenticacao.LoginRequest;
 import com.ruifanha.clinicawisestart.dto.autenticacao.LoginResponse;
 import com.ruifanha.clinicawisestart.service.AutenticacaoService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor os endpoints iniciais de autenticacao.
 @RestController
 @RequestMapping("/auth")
@@ -25,7 +27,7 @@ public class AutenticacaoController {
 
 	@PostMapping("/login")
 	@ResponseStatus(HttpStatus.OK)
-	public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+	public LoginResponse login(@Valid @RequestBody LoginRequest loginRequest) {
 		try {
 			return autenticacaoService.autenticar(loginRequest);
 		} catch (IllegalArgumentException exception) {

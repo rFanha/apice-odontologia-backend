@@ -359,7 +359,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Validacoes
 
-106. [ ] Bean Validation configurado.
+106. [X] Bean Validation configurado.
 
 107. [ ] Campos obrigatorios validados com anotacoes como `@NotNull`, `@NotBlank` ou equivalentes.
 

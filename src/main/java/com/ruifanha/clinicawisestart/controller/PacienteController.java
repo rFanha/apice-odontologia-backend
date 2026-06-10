@@ -18,6 +18,8 @@ import com.ruifanha.clinicawisestart.dto.paciente.PacienteRequest;
 import com.ruifanha.clinicawisestart.dto.paciente.PacienteResponse;
 import com.ruifanha.clinicawisestart.service.PacienteService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor o CRUD de pacientes.
 @RestController
 @RequestMapping("/pacientes")
@@ -48,7 +50,7 @@ public class PacienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public PacienteResponse criar(@RequestBody PacienteRequest pacienteRequest) {
+	public PacienteResponse criar(@Valid @RequestBody PacienteRequest pacienteRequest) {
 		try {
 			return PacienteResponse.fromEntity(pacienteService.criar(pacienteRequest));
 		} catch (IllegalArgumentException exception) {
@@ -59,7 +61,7 @@ public class PacienteController {
 	@PutMapping("/{id}")
 	public PacienteResponse atualizar(
 		@PathVariable Long id,
-		@RequestBody PacienteRequest pacienteRequest
+		@Valid @RequestBody PacienteRequest pacienteRequest
 	) {
 		try {
 			return PacienteResponse.fromEntity(pacienteService.atualizar(id, pacienteRequest));

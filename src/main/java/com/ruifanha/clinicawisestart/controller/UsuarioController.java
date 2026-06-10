@@ -21,6 +21,8 @@ import com.ruifanha.clinicawisestart.dto.usuario.UsuarioRequest;
 import com.ruifanha.clinicawisestart.dto.usuario.UsuarioResponse;
 import com.ruifanha.clinicawisestart.service.UsuarioService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor endpoints de usuarios protegidos por perfil ADMIN.
 @RestController
 @RequestMapping("/usuarios")
@@ -61,7 +63,7 @@ public class UsuarioController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public UsuarioResponse criar(
 		@AuthenticationPrincipal Usuario usuarioLogado,
-		@RequestBody UsuarioRequest usuarioRequest
+		@Valid @RequestBody UsuarioRequest usuarioRequest
 	) {
 		try {
 			return UsuarioResponse.fromEntity(usuarioService.criar(usuarioLogado, usuarioRequest));
@@ -74,7 +76,7 @@ public class UsuarioController {
 	public UsuarioResponse atualizar(
 		@AuthenticationPrincipal Usuario usuarioLogado,
 		@PathVariable Long id,
-		@RequestBody UsuarioRequest usuarioRequest
+		@Valid @RequestBody UsuarioRequest usuarioRequest
 	) {
 		try {
 			return UsuarioResponse.fromEntity(usuarioService.atualizar(usuarioLogado, id, usuarioRequest));
