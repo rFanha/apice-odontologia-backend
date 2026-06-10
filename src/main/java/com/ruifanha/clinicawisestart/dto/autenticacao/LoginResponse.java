@@ -8,6 +8,7 @@ public record LoginResponse(
 	String nome,
 	String email,
 	PerfilUsuario perfil,
-	Boolean ativo
+	Boolean ativo,
+	String token
 ) {
 }

@@ -2,8 +2,8 @@
 
 INSERT INTO usuarios (nome, cpf, email, senha, perfil, ativo)
 VALUES
-	('Administrador Apice', '00000000000', 'admin@apiceodontologia.com.br', '$2a$10$exemploHashBcryptParaEstudo1234567890', 'ADMIN', TRUE),
-	('Dra. Marina Lopes', '11111111111', 'marina.lopes@apiceodontologia.com.br', '$2a$10$exemploHashBcryptParaEstudo1234567890', 'DENTISTA', TRUE)
+	('Administrador Apice', '00000000000', 'admin@apiceodontologia.com.br', '$2a$10$X5sJwq1ptNwwZMMC04GExubC9xSxzDRAU0vCJnytg47Lfhu7DAGfq', 'ADMIN', TRUE),
+	('Dra. Marina Lopes', '11111111111', 'marina.lopes@apiceodontologia.com.br', '$2a$10$X5sJwq1ptNwwZMMC04GExubC9xSxzDRAU0vCJnytg47Lfhu7DAGfq', 'DENTISTA', TRUE)
 ON CONFLICT (cpf) DO NOTHING;
 
 INSERT INTO pacientes (nome, email, cpf, telefone)

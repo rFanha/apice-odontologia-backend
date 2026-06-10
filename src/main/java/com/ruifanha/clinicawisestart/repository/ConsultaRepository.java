@@ -16,6 +16,49 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	// Busca somente as consultas vinculadas ao dentista informado.
 	List<Consulta> findByDentistaId(Long dentistaId);
 
+	// Conta consultas por status para montar indicadores do dashboard.
+	long countByStatus(StatusConsulta status);
+
+	// Conta consultas aplicando filtros opcionais de relatorio.
+	@Query("""
+		SELECT COUNT(DISTINCT c)
+		FROM Consulta c
+		LEFT JOIN c.dentista.especialidades de
+		WHERE (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
+		AND (:especialidadeId IS NULL OR de.especialidade.id = :especialidadeId)
+		AND (CAST(:dataInicio AS java.time.LocalDateTime) IS NULL OR c.dataInicio >= :dataInicio)
+		AND (CAST(:dataFim AS java.time.LocalDateTime) IS NULL OR c.dataInicio <= :dataFim)
+	""")
+	long countRelatorio(
+		@Param("usuarioId") Long usuarioId,
+		@Param("pacienteId") Long pacienteId,
+		@Param("especialidadeId") Long especialidadeId,
+		@Param("dataInicio") LocalDateTime dataInicio,
+		@Param("dataFim") LocalDateTime dataFim
+	);
+
+	// Conta consultas por status aplicando filtros opcionais de relatorio.
+	@Query("""
+		SELECT COUNT(DISTINCT c)
+		FROM Consulta c
+		LEFT JOIN c.dentista.especialidades de
+		WHERE c.status = :status
+		AND (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
+		AND (:especialidadeId IS NULL OR de.especialidade.id = :especialidadeId)
+		AND (CAST(:dataInicio AS java.time.LocalDateTime) IS NULL OR c.dataInicio >= :dataInicio)
+		AND (CAST(:dataFim AS java.time.LocalDateTime) IS NULL OR c.dataInicio <= :dataFim)
+	""")
+	long countRelatorioPorStatus(
+		@Param("usuarioId") Long usuarioId,
+		@Param("pacienteId") Long pacienteId,
+		@Param("especialidadeId") Long especialidadeId,
+		@Param("dataInicio") LocalDateTime dataInicio,
+		@Param("dataFim") LocalDateTime dataFim,
+		@Param("status") StatusConsulta status
+	);
+
 	// Verifica se ja existe consulta ativa no mesmo intervalo para o dentista.
 	@Query("""
 		SELECT COUNT(c) > 0

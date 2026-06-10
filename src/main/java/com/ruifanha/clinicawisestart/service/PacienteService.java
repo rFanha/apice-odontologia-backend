@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ruifanha.clinicawisestart.domain.paciente.Paciente;
+import com.ruifanha.clinicawisestart.dto.paciente.PacienteRequest;
 import com.ruifanha.clinicawisestart.repository.PacienteRepository;
 
 // Service criado para concentrar regras de negocio relacionadas aos pacientes.
@@ -16,6 +17,24 @@ public class PacienteService {
 
 	public PacienteService(PacienteRepository pacienteRepository) {
 		this.pacienteRepository = pacienteRepository;
+	}
+
+	@Transactional
+	public Paciente criar(PacienteRequest pacienteRequest) {
+		Paciente paciente = new Paciente();
+		aplicarDados(paciente, pacienteRequest);
+		validarDuplicidadeEmail(paciente);
+		validarDuplicidadeCpf(paciente);
+		return pacienteRepository.save(paciente);
+	}
+
+	@Transactional
+	public Paciente atualizar(Long id, PacienteRequest pacienteRequest) {
+		Paciente paciente = buscarPorId(id);
+		aplicarDados(paciente, pacienteRequest);
+		validarDuplicidadeEmail(paciente);
+		validarDuplicidadeCpf(paciente);
+		return pacienteRepository.save(paciente);
 	}
 
 	@Transactional
@@ -43,6 +62,18 @@ public class PacienteService {
 		// Confirma que o paciente existe antes de solicitar a exclusao.
 		Paciente paciente = buscarPorId(id);
 		pacienteRepository.delete(paciente);
+	}
+
+	private void aplicarDados(Paciente paciente, PacienteRequest pacienteRequest) {
+		// Copia os dados recebidos para a entidade antes de salvar.
+		if (pacienteRequest == null) {
+			throw new IllegalArgumentException("Dados do paciente sao obrigatorios.");
+		}
+
+		paciente.setNome(pacienteRequest.nome());
+		paciente.setEmail(pacienteRequest.email());
+		paciente.setCpf(pacienteRequest.cpf());
+		paciente.setTelefone(pacienteRequest.telefone());
 	}
 
 	private void validarDuplicidadeEmail(Paciente paciente) {

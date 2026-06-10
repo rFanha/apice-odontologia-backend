@@ -273,7 +273,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 68. [X] Driver Postgres, MySQL ou outro banco relacional adicionado.
 
-69. [ ] Dependencia Spring Security adicionada.
+69. [X] Dependencia Spring Security adicionada.
 
 70. [X] Configuracao de conexao com banco adicionada.
 
@@ -321,41 +321,41 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 88. [X] Endpoints de autenticacao implementados.
 
-89. [ ] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
+89. [X] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
 
-90. [ ] Endpoints de pacientes implementados.
+90. [X] Endpoints de pacientes implementados.
 
-91. [ ] Endpoints de dentistas implementados.
+91. [X] Endpoints de dentistas implementados.
 
-92. [ ] Endpoints de especialidades implementados.
+92. [X] Endpoints de especialidades implementados.
 
-93. [ ] Endpoints de consultas implementados.
+93. [X] Endpoints de consultas implementados.
 
-94. [ ] Endpoint de cancelamento de consultas implementado.
+94. [X] Endpoint de cancelamento de consultas implementado.
 
-95. [ ] Endpoints de relatorios filtrados ou dashboard implementados.
+95. [X] Endpoints de relatorios filtrados ou dashboard implementados.
 
-96. [ ] Filtro por usuario implementado em relatorios.
+96. [X] Filtro por usuario implementado em relatorios.
 
-97. [ ] Filtro por paciente implementado em relatorios.
+97. [X] Filtro por paciente implementado em relatorios.
 
-98. [ ] Filtro por especialidade implementado em relatorios.
+98. [X] Filtro por especialidade implementado em relatorios.
 
-99. [ ] Filtro por data implementado em relatorios.
+99. [X] Filtro por data implementado em relatorios.
 
 ### Seguranca
 
-100. [ ] Autenticacao com JWT implementada.
+100. [X] Autenticacao com JWT implementada.
 
-101. [ ] Autorizacao por perfil implementada.
+101. [X] Autorizacao por perfil implementada.
 
-102. [ ] Rotas sensiveis protegidas pelo Spring Security.
+102. [X] Rotas sensiveis protegidas pelo Spring Security.
 
-103. [ ] Senhas armazenadas com hash seguro.
+103. [X] Senhas armazenadas com hash seguro.
 
-104. [ ] Validacao de permissao para `ADMIN` implementada.
+104. [X] Validacao de permissao para `ADMIN` implementada.
 
-105. [ ] Validacao de permissao para `DENTISTA` implementada.
+105. [X] Validacao de permissao para `DENTISTA` implementada.
 
 ### Validacoes
 
