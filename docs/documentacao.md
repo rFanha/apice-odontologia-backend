@@ -363,7 +363,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 107. [X] Campos obrigatorios validados com anotacoes como `@NotNull`, `@NotBlank` ou equivalentes.
 
-108. [ ] Tamanho de campos validado com anotacoes como `@Size`.
+108. [X] Tamanho de campos validado com anotacoes como `@Size`.
 
 109. [ ] E-mails validados com `@Email`.
 
