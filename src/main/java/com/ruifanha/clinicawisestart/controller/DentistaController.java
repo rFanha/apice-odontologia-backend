@@ -19,6 +19,8 @@ import com.ruifanha.clinicawisestart.dto.dentista.DentistaRequest;
 import com.ruifanha.clinicawisestart.dto.dentista.DentistaResponse;
 import com.ruifanha.clinicawisestart.service.DentistaService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor o CRUD de dentistas.
 @RestController
 @RequestMapping("/dentistas")
@@ -49,7 +51,7 @@ public class DentistaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public DentistaResponse criar(@RequestBody DentistaRequest dentistaRequest) {
+	public DentistaResponse criar(@Valid @RequestBody DentistaRequest dentistaRequest) {
 		try {
 			return DentistaResponse.fromEntity(dentistaService.criar(dentistaRequest));
 		} catch (IllegalArgumentException exception) {
@@ -60,7 +62,7 @@ public class DentistaController {
 	@PutMapping("/{id}")
 	public DentistaResponse atualizar(
 		@PathVariable Long id,
-		@RequestBody DentistaRequest dentistaRequest
+		@Valid @RequestBody DentistaRequest dentistaRequest
 	) {
 		try {
 			return DentistaResponse.fromEntity(dentistaService.atualizar(id, dentistaRequest));

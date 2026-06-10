@@ -22,6 +22,8 @@ import com.ruifanha.clinicawisestart.dto.consulta.ConsultaRequest;
 import com.ruifanha.clinicawisestart.dto.consulta.ConsultaResponse;
 import com.ruifanha.clinicawisestart.service.ConsultaService;
 
+import jakarta.validation.Valid;
+
 // Controller criado para expor o CRUD de consultas.
 @RestController
 @RequestMapping("/consultas")
@@ -64,7 +66,7 @@ public class ConsultaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ConsultaResponse criar(
 		@AuthenticationPrincipal Usuario usuarioLogado,
-		@RequestBody ConsultaRequest consultaRequest
+		@Valid @RequestBody ConsultaRequest consultaRequest
 	) {
 		try {
 			return ConsultaResponse.fromEntity(consultaService.criar(usuarioLogado, consultaRequest));
@@ -77,7 +79,7 @@ public class ConsultaController {
 	public ConsultaResponse atualizar(
 		@AuthenticationPrincipal Usuario usuarioLogado,
 		@PathVariable Long id,
-		@RequestBody ConsultaRequest consultaRequest
+		@Valid @RequestBody ConsultaRequest consultaRequest
 	) {
 		try {
 			return ConsultaResponse.fromEntity(consultaService.atualizar(usuarioLogado, id, consultaRequest));
@@ -103,7 +105,7 @@ public class ConsultaController {
 	public ConsultaResponse cancelar(
 		@AuthenticationPrincipal Usuario usuarioLogado,
 		@PathVariable Long id,
-		@RequestBody CancelamentoConsultaRequest cancelamentoRequest
+		@Valid @RequestBody CancelamentoConsultaRequest cancelamentoRequest
 	) {
 		try {
 			return ConsultaResponse.fromEntity(consultaService.cancelar(usuarioLogado, id, cancelamentoRequest));
