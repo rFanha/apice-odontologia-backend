@@ -1,0 +1,445 @@
+{
+  "info": {
+    "name": "Clinica WiseStart - Backend",
+    "description": "Colecao para testar manualmente a API do backend no Postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "usuarioId",
+      "value": "1"
+    },
+    {
+      "key": "pacienteId",
+      "value": "1"
+    },
+    {
+      "key": "dentistaId",
+      "value": "1"
+    },
+    {
+      "key": "especialidadeId",
+      "value": "1"
+    },
+    {
+      "key": "consultaId",
+      "value": "1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Auth - Login",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@apiceodontologia.com.br\",\n  \"senha\": \"sua-senha\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
+              "const json = pm.response.json();",
+              "if (json.token) { pm.collectionVariables.set('token', json.token); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuarios - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/usuarios"
+      }
+    },
+    {
+      "name": "Usuarios - Buscar Por Id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/usuarios/{{usuarioId}}"
+      }
+    },
+    {
+      "name": "Usuarios - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Dra. Julia Ramos\",\n  \"cpf\": \"66666666666\",\n  \"email\": \"julia.ramos@apiceodontologia.com.br\",\n  \"senha\": \"senha-segura\",\n  \"perfil\": \"DENTISTA\",\n  \"ativo\": true\n}"
+        },
+        "url": "{{baseUrl}}/usuarios"
+      }
+    },
+    {
+      "name": "Usuarios - Atualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Administrador Apice\",\n  \"cpf\": \"00000000000\",\n  \"email\": \"admin@apiceodontologia.com.br\",\n  \"senha\": null,\n  \"perfil\": \"ADMIN\",\n  \"ativo\": true\n}"
+        },
+        "url": "{{baseUrl}}/usuarios/{{usuarioId}}"
+      }
+    },
+    {
+      "name": "Usuarios - Excluir",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/usuarios/{{usuarioId}}"
+      }
+    },
+    {
+      "name": "Pacientes - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pacientes"
+      }
+    },
+    {
+      "name": "Pacientes - Buscar Por Id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/pacientes/{{pacienteId}}"
+      }
+    },
+    {
+      "name": "Pacientes - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Beatriz Martins\",\n  \"email\": \"beatriz.martins@email.com\",\n  \"cpf\": \"77777777777\",\n  \"telefone\": \"(11) 96666-3333\"\n}"
+        },
+        "url": "{{baseUrl}}/pacientes"
+      }
+    },
+    {
+      "name": "Pacientes - Atualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Carlos Henrique Souza\",\n  \"email\": \"carlos.souza@email.com\",\n  \"cpf\": \"22222222222\",\n  \"telefone\": \"(11) 98888-1111\"\n}"
+        },
+        "url": "{{baseUrl}}/pacientes/{{pacienteId}}"
+      }
+    },
+    {
+      "name": "Pacientes - Excluir",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/pacientes/{{pacienteId}}"
+      }
+    },
+    {
+      "name": "Dentistas - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/dentistas"
+      }
+    },
+    {
+      "name": "Dentistas - Listar Ativos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/dentistas?ativo=true"
+      }
+    },
+    {
+      "name": "Dentistas - Buscar Por Id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/dentistas/{{dentistaId}}"
+      }
+    },
+    {
+      "name": "Dentistas - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Dra. Laura Nunes\",\n  \"cpf\": \"88888888888\",\n  \"email\": \"laura.nunes@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-24680\",\n  \"ativo\": true\n}"
+        },
+        "url": "{{baseUrl}}/dentistas"
+      }
+    },
+    {
+      "name": "Dentistas - Atualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Dra. Marina Lopes\",\n  \"cpf\": \"44444444444\",\n  \"email\": \"marina.dentista@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-12345\",\n  \"ativo\": true\n}"
+        },
+        "url": "{{baseUrl}}/dentistas/{{dentistaId}}"
+      }
+    },
+    {
+      "name": "Dentistas - Excluir",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/dentistas/{{dentistaId}}"
+      }
+    },
+    {
+      "name": "Especialidades - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/especialidades"
+      }
+    },
+    {
+      "name": "Especialidades - Buscar Por Id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/especialidades/{{especialidadeId}}"
+      }
+    },
+    {
+      "name": "Especialidades - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Implantodontia\"\n}"
+        },
+        "url": "{{baseUrl}}/especialidades"
+      }
+    },
+    {
+      "name": "Especialidades - Atualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Clinica Geral\"\n}"
+        },
+        "url": "{{baseUrl}}/especialidades/{{especialidadeId}}"
+      }
+    },
+    {
+      "name": "Especialidades - Excluir",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/especialidades/{{especialidadeId}}"
+      }
+    },
+    {
+      "name": "Consultas - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/consultas"
+      }
+    },
+    {
+      "name": "Consultas - Listar Por Dentista",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/consultas?dentistaId={{dentistaId}}"
+      }
+    },
+    {
+      "name": "Consultas - Buscar Por Id",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/consultas/{{consultaId}}"
+      }
+    },
+    {
+      "name": "Consultas - Criar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao de rotina\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-06-15T09:00:00\",\n  \"dataFim\": \"2026-06-15T10:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+        },
+        "url": "{{baseUrl}}/consultas"
+      }
+    },
+    {
+      "name": "Consultas - Atualizar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao atualizada\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-06-15T11:00:00\",\n  \"dataFim\": \"2026-06-15T12:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+        },
+        "url": "{{baseUrl}}/consultas/{{consultaId}}"
+      }
+    },
+    {
+      "name": "Consultas - Cancelar",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"motivoCancelamento\": \"Paciente solicitou remarcacao.\"\n}"
+        },
+        "url": "{{baseUrl}}/consultas/{{consultaId}}/cancelar"
+      }
+    },
+    {
+      "name": "Consultas - Excluir",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/consultas/{{consultaId}}"
+      }
+    },
+    {
+      "name": "Relatorios - Dashboard",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/relatorios/dashboard"
+      }
+    },
+    {
+      "name": "Relatorios - Dashboard Com Filtros",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/relatorios/dashboard?usuarioId={{usuarioId}}&pacienteId={{pacienteId}}&especialidadeId={{especialidadeId}}&dataInicio=2026-06-01T00:00:00&dataFim=2026-06-30T23:59:59"
+      }
+    },
+    {
+      "name": "Validacao - Email Invalido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Paciente Teste\",\n  \"email\": \"email-invalido\",\n  \"cpf\": \"99999999999\",\n  \"telefone\": \"(11) 95555-4444\"\n}"
+        },
+        "url": "{{baseUrl}}/pacientes"
+      }
+    },
+    {
+      "name": "Validacao - Periodo Invalido",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Periodo invalido\",\n  \"dataInicio\": \"2026-06-15T10:00:00\",\n  \"dataFim\": \"2026-06-15T09:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+        },
+        "url": "{{baseUrl}}/consultas"
+      }
+    }
+  ]
+}
