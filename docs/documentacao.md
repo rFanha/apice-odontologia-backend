@@ -329,7 +329,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 92. [X] Endpoints de especialidades implementados.
 
-93. [ ] Endpoints de consultas implementados.
+93. [X] Endpoints de consultas implementados.
 
 94. [ ] Endpoint de cancelamento de consultas implementado.
 
