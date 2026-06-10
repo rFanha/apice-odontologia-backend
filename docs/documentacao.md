@@ -295,7 +295,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 77. [X] `UsuarioRepository` criado.
 
-78. [ ] `PacienteRepository` criado.
+78. [X] `PacienteRepository` criado.
 
 79. [ ] `DentistaRepository` criado.
 
