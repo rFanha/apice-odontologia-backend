@@ -323,7 +323,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 89. [X] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
 
-90. [ ] Endpoints de pacientes implementados.
+90. [X] Endpoints de pacientes implementados.
 
 91. [ ] Endpoints de dentistas implementados.
 
