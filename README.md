@@ -30,6 +30,9 @@ A aplicacao usa por padrao:
 
 Execute os scripts abaixo no PostgreSQL, nessa ordem:
 
+$env:PGPASSWORD="Apiceodontologia123"; psql -h apiceodontologia.ddns.net -p 5432 -U apiceodontologia -d sistema_gestao_consultas -f src/main/resources/sql/01-ddl.sql
+$env:PGPASSWORD="Apiceodontologia123"; psql -h apiceodontologia.ddns.net -p 5432 -U apiceodontologia -d sistema_gestao_consultas -f src/main/resources/sql/02-dml.sql
+
 ```text
 src/main/resources/sql/01-ddl.sql
 src/main/resources/sql/02-dml.sql
