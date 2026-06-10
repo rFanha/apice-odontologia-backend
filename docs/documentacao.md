@@ -293,13 +293,13 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Repositories
 
-77. [ ] `UsuarioRepository` criado.
+77. [X] `UsuarioRepository` criado.
 
-78. [ ] `PacienteRepository` criado.
+78. [X] `PacienteRepository` criado.
 
-79. [ ] `DentistaRepository` criado.
+79. [X] `DentistaRepository` criado.
 
-80. [ ] `EspecialidadeRepository` criado.
+80. [X] `EspecialidadeRepository` criado.
 
 81. [X] `ConsultaRepository` criado.
 
@@ -307,11 +307,11 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 82. [X] `UsuarioService` criado.
 
-83. [ ] `PacienteService` criado.
+83. [X] `PacienteService` criado.
 
-84. [ ] `DentistaService` criado.
+84. [X] `DentistaService` criado.
 
-85. [ ] `EspecialidadeService` criado.
+85. [X] `EspecialidadeService` criado.
 
 86. [X] `ConsultaService` criado.
 
