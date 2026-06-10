@@ -40,6 +40,8 @@ public class ConsultaService {
 
 	@Transactional
 	public Consulta criar(Usuario usuarioLogado, ConsultaRequest consultaRequest) {
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+
 		Consulta consulta = new Consulta();
 		aplicarDados(consulta, usuarioLogado, consultaRequest, true);
 		return salvar(consulta);
@@ -47,13 +49,17 @@ public class ConsultaService {
 
 	@Transactional
 	public Consulta atualizar(Usuario usuarioLogado, Long id, ConsultaRequest consultaRequest) {
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+
 		Consulta consulta = buscarPorId(id);
 		aplicarDados(consulta, usuarioLogado, consultaRequest, false);
 		return salvar(consulta);
 	}
 
 	@Transactional
-	public Consulta cancelar(Long id, CancelamentoConsultaRequest cancelamentoRequest) {
+	public Consulta cancelar(Usuario usuarioLogado, Long id, CancelamentoConsultaRequest cancelamentoRequest) {
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+
 		Consulta consulta = buscarPorId(id);
 		validarCancelamentoPermitido(consulta);
 
@@ -85,11 +91,22 @@ public class ConsultaService {
 
 	@Transactional(readOnly = true)
 	public List<Consulta> listar(Usuario usuarioLogado, Long dentistaId) {
-		// Quando informado, filtra a agenda pelo dentista escolhido.
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+
+		// Usuarios DENTISTA devem consultar a agenda filtrada por dentista.
+		if (PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil()) && dentistaId == null) {
+			throw new IllegalArgumentException("Usuarios DENTISTA devem informar dentistaId para listar consultas.");
+		}
 		if (dentistaId != null) {
 			return listarPorDentista(dentistaId);
 		}
 		return listarTodasParaAdmin(usuarioLogado);
+	}
+
+	@Transactional(readOnly = true)
+	public Consulta buscarPorId(Usuario usuarioLogado, Long id) {
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+		return buscarPorId(id);
 	}
 
 	@Transactional(readOnly = true)
@@ -110,10 +127,25 @@ public class ConsultaService {
 	}
 
 	@Transactional
-	public void excluir(Long id) {
+	public void excluir(Usuario usuarioLogado, Long id) {
+		validarPermissaoGerenciarConsultas(usuarioLogado);
+
 		// Confirma que a consulta existe antes de solicitar a exclusao.
 		Consulta consulta = buscarPorId(id);
 		consultaRepository.delete(consulta);
+	}
+
+	private void validarPermissaoGerenciarConsultas(Usuario usuarioLogado) {
+		// Permite operacoes de agenda apenas para ADMIN e DENTISTA.
+		if (usuarioLogado == null || usuarioLogado.getPerfil() == null) {
+			throw new IllegalArgumentException("Usuario autenticado e obrigatorio.");
+		}
+		boolean admin = PerfilUsuario.ADMIN.equals(usuarioLogado.getPerfil());
+		boolean dentista = PerfilUsuario.DENTISTA.equals(usuarioLogado.getPerfil());
+
+		if (!admin && !dentista) {
+			throw new IllegalArgumentException("Somente usuarios ADMIN ou DENTISTA podem gerenciar consultas.");
+		}
 	}
 
 	private void aplicarDados(

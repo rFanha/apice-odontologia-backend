@@ -355,7 +355,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 104. [X] Validacao de permissao para `ADMIN` implementada.
 
-105. [ ] Validacao de permissao para `DENTISTA` implementada.
+105. [X] Validacao de permissao para `DENTISTA` implementada.
 
 ### Validacoes
 

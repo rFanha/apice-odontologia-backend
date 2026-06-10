@@ -49,9 +49,12 @@ public class ConsultaController {
 	}
 
 	@GetMapping("/{id}")
-	public ConsultaResponse buscarPorId(@PathVariable Long id) {
+	public ConsultaResponse buscarPorId(
+		@AuthenticationPrincipal Usuario usuarioLogado,
+		@PathVariable Long id
+	) {
 		try {
-			return ConsultaResponse.fromEntity(consultaService.buscarPorId(id));
+			return ConsultaResponse.fromEntity(consultaService.buscarPorId(usuarioLogado, id));
 		} catch (IllegalArgumentException exception) {
 			throw converterErro(exception);
 		}
@@ -85,9 +88,12 @@ public class ConsultaController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void excluir(@PathVariable Long id) {
+	public void excluir(
+		@AuthenticationPrincipal Usuario usuarioLogado,
+		@PathVariable Long id
+	) {
 		try {
-			consultaService.excluir(id);
+			consultaService.excluir(usuarioLogado, id);
 		} catch (IllegalArgumentException exception) {
 			throw converterErro(exception);
 		}
@@ -95,11 +101,12 @@ public class ConsultaController {
 
 	@PutMapping("/{id}/cancelar")
 	public ConsultaResponse cancelar(
+		@AuthenticationPrincipal Usuario usuarioLogado,
 		@PathVariable Long id,
 		@RequestBody CancelamentoConsultaRequest cancelamentoRequest
 	) {
 		try {
-			return ConsultaResponse.fromEntity(consultaService.cancelar(id, cancelamentoRequest));
+			return ConsultaResponse.fromEntity(consultaService.cancelar(usuarioLogado, id, cancelamentoRequest));
 		} catch (IllegalArgumentException exception) {
 			throw converterErro(exception);
 		}
@@ -108,6 +115,9 @@ public class ConsultaController {
 	private ResponseStatusException converterErro(IllegalArgumentException exception) {
 		// Converte erros de regra de negocio para respostas HTTP simples.
 		if (exception.getMessage().contains("ADMIN")) {
+			return new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage(), exception);
+		}
+		if (exception.getMessage().contains("DENTISTA")) {
 			return new ResponseStatusException(HttpStatus.FORBIDDEN, exception.getMessage(), exception);
 		}
 		if (exception.getMessage().contains("nao encontrad")) {
