@@ -16,7 +16,10 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Table(
 	name = "dentista_especialidade",
-	uniqueConstraints = @UniqueConstraint(columnNames = {"id_dentista", "id_especialidade"})
+	uniqueConstraints = @UniqueConstraint(
+		name = "uk_dentista_especialidade",
+		columnNames = {"id_dentista", "id_especialidade"}
+	)
 )
 public class DentistaEspecialidade {
 

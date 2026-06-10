@@ -1,12 +1,17 @@
 package com.ruifanha.clinicawisestart.domain.paciente;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.ruifanha.clinicawisestart.domain.consulta.Consulta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
@@ -19,20 +24,24 @@ public class Paciente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 255)
 	private String nome;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 255)
 	private String email;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 14)
 	private String cpf;
 
 	@Column(name = "data_criacao", nullable = false, updatable = false)
 	private LocalDateTime dataCriacao;
 
-	@Column
+	@Column(length = 30)
 	private String telefone;
+
+	// Mantem o historico de consultas associado ao paciente.
+	@OneToMany(mappedBy = "paciente")
+	private List<Consulta> consultas = new ArrayList<>();
 
 	@PrePersist
 	void prepararNovoRegistro() {
@@ -88,5 +97,13 @@ public class Paciente {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
 	}
 }

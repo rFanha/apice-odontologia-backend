@@ -279,17 +279,17 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Entidades JPA/Hibernate
 
-71. [ ] Entidade `Usuario` mapeada.
+71. [X] Entidade `Usuario` mapeada.
 
-72. [ ] Entidade `Paciente` mapeada.
+72. [X] Entidade `Paciente` mapeada.
 
-73. [ ] Entidade `Dentista` mapeada.
+73. [X] Entidade `Dentista` mapeada.
 
-74. [ ] Entidade `Especialidade` mapeada.
+74. [X] Entidade `Especialidade` mapeada.
 
-75. [ ] Entidade `Consulta` mapeada.
+75. [X] Entidade `Consulta` mapeada.
 
-76. [ ] Relacionamentos entre entidades mapeados corretamente.
+76. [X] Relacionamentos entre entidades mapeados corretamente.
 
 ### Repositories
 

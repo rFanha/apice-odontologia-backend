@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
+import com.ruifanha.clinicawisestart.domain.consulta.Consulta;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,16 +24,16 @@ public class Dentista {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 255)
 	private String nome;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 14)
 	private String cpf;
 
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false, unique = true, length = 255)
 	private String email;
 
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	private String cro;
 
 	@Column(name = "data_criacao", nullable = false, updatable = false)
@@ -43,6 +45,10 @@ public class Dentista {
 	// Mantem as especialidades vinculadas ao dentista pela tabela intermediaria.
 	@OneToMany(mappedBy = "dentista")
 	private List<DentistaEspecialidade> especialidades = new ArrayList<>();
+
+	// Mantem a agenda de consultas associada ao dentista.
+	@OneToMany(mappedBy = "dentista")
+	private List<Consulta> consultas = new ArrayList<>();
 
 	@PrePersist
 	void prepararNovoRegistro() {
@@ -117,5 +123,13 @@ public class Dentista {
 
 	public void setEspecialidades(List<DentistaEspecialidade> especialidades) {
 		this.especialidades = especialidades;
+	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
 	}
 }
