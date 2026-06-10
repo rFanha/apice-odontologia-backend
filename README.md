@@ -37,6 +37,13 @@ src/main/resources/sql/02-dml.sql
 
 O DML cria dados iniciais para usuarios, pacientes, dentistas, especialidades e uma consulta de exemplo.
 
+Usuarios iniciais para testes:
+
+```text
+admin@apiceodontologia.com.br / Apice@123
+marina.lopes@apiceodontologia.com.br / Apice@123
+```
+
 ## Execucao
 
 Para subir a API localmente:

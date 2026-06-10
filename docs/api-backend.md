@@ -22,7 +22,7 @@ Request:
 ```json
 {
   "email": "admin@apiceodontologia.com.br",
-  "senha": "sua-senha"
+  "senha": "Apice@123"
 }
 ```
 

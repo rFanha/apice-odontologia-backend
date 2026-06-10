@@ -2,11 +2,12 @@
 
 INSERT INTO usuarios (nome, cpf, email, senha, perfil, ativo)
 VALUES
-	('Administrador Apice', '00000000000', 'admin@apiceodontologia.com.br', '$2a$10$X5sJwq1ptNwwZMMC04GExubC9xSxzDRAU0vCJnytg47Lfhu7DAGfq', 'ADMIN', TRUE),
-	('Dra. Marina Lopes', '44444444444', 'marina.lopes@apiceodontologia.com.br', '$2a$10$X5sJwq1ptNwwZMMC04GExubC9xSxzDRAU0vCJnytg47Lfhu7DAGfq', 'DENTISTA', TRUE)
+	('Administrador Apice', '00000000000', 'admin@apiceodontologia.com.br', '$2a$10$9x6klaIz1bURrB5kM7T9nOZB1RLpKXagL7s5LVRCz5c8aoM.fBd8e', 'ADMIN', TRUE),
+	('Dra. Marina Lopes', '44444444444', 'marina.lopes@apiceodontologia.com.br', '$2a$10$9x6klaIz1bURrB5kM7T9nOZB1RLpKXagL7s5LVRCz5c8aoM.fBd8e', 'DENTISTA', TRUE)
 ON CONFLICT (email) DO UPDATE
 SET nome = EXCLUDED.nome,
 	cpf = EXCLUDED.cpf,
+	senha = EXCLUDED.senha,
 	perfil = EXCLUDED.perfil,
 	ativo = EXCLUDED.ativo;
 
