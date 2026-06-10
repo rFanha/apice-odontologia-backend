@@ -361,7 +361,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 106. [X] Bean Validation configurado.
 
-107. [ ] Campos obrigatorios validados com anotacoes como `@NotNull`, `@NotBlank` ou equivalentes.
+107. [X] Campos obrigatorios validados com anotacoes como `@NotNull`, `@NotBlank` ou equivalentes.
 
 108. [ ] Tamanho de campos validado com anotacoes como `@Size`.
 
