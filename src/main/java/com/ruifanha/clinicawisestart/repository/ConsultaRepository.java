@@ -24,8 +24,12 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 		SELECT COUNT(c)
 		FROM Consulta c
 		WHERE (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
 	""")
-	long countRelatorio(@Param("usuarioId") Long usuarioId);
+	long countRelatorio(
+		@Param("usuarioId") Long usuarioId,
+		@Param("pacienteId") Long pacienteId
+	);
 
 	// Conta consultas por status aplicando filtros opcionais de relatorio.
 	@Query("""
@@ -33,9 +37,11 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 		FROM Consulta c
 		WHERE c.status = :status
 		AND (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+		AND (:pacienteId IS NULL OR c.paciente.id = :pacienteId)
 	""")
 	long countRelatorioPorStatus(
 		@Param("usuarioId") Long usuarioId,
+		@Param("pacienteId") Long pacienteId,
 		@Param("status") StatusConsulta status
 	);
 

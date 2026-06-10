@@ -22,7 +22,10 @@ public class RelatorioController {
 	}
 
 	@GetMapping("/dashboard")
-	public DashboardResponse buscarDashboard(@RequestParam(required = false) Long usuarioId) {
-		return relatorioService.buscarDashboard(usuarioId);
+	public DashboardResponse buscarDashboard(
+		@RequestParam(required = false) Long usuarioId,
+		@RequestParam(required = false) Long pacienteId
+	) {
+		return relatorioService.buscarDashboard(usuarioId, pacienteId);
 	}
 }

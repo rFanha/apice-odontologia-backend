@@ -337,7 +337,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 96. [X] Filtro por usuario implementado em relatorios.
 
-97. [ ] Filtro por paciente implementado em relatorios.
+97. [X] Filtro por paciente implementado em relatorios.
 
 98. [ ] Filtro por especialidade implementado em relatorios.
 

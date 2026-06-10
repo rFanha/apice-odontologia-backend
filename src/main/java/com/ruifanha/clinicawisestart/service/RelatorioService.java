@@ -32,13 +32,13 @@ public class RelatorioService {
 	}
 
 	@Transactional(readOnly = true)
-	public DashboardResponse buscarDashboard(Long usuarioId) {
-		// Resume os principais indicadores, aplicando filtro de usuario quando informado.
+	public DashboardResponse buscarDashboard(Long usuarioId, Long pacienteId) {
+		// Resume os principais indicadores, aplicando filtros informados.
 		return new DashboardResponse(
-			consultaRepository.countRelatorio(usuarioId),
-			consultaRepository.countRelatorioPorStatus(usuarioId, StatusConsulta.AGENDADA),
-			consultaRepository.countRelatorioPorStatus(usuarioId, StatusConsulta.CANCELADA),
-			consultaRepository.countRelatorioPorStatus(usuarioId, StatusConsulta.FINALIZADA),
+			consultaRepository.countRelatorio(usuarioId, pacienteId),
+			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.AGENDADA),
+			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.CANCELADA),
+			consultaRepository.countRelatorioPorStatus(usuarioId, pacienteId, StatusConsulta.FINALIZADA),
 			pacienteRepository.count(),
 			dentistaRepository.count(),
 			especialidadeRepository.count()
