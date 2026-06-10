@@ -311,7 +311,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 84. [X] `DentistaService` criado.
 
-85. [ ] `EspecialidadeService` criado.
+85. [X] `EspecialidadeService` criado.
 
 86. [X] `ConsultaService` criado.
 
