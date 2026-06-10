@@ -41,10 +41,10 @@ public class Consulta {
 	@JoinColumn(name = "id_usuario", nullable = false)
 	private Usuario usuario;
 
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "TEXT")
 	private String descricao;
 
-	@Column(name = "motivo_cancelamento")
+	@Column(name = "motivo_cancelamento", columnDefinition = "TEXT")
 	private String motivoCancelamento;
 
 	@Column(name = "data_inicio", nullable = false)
@@ -58,7 +58,7 @@ public class Consulta {
 
 	// Armazena o status como texto para facilitar consultas e relatorios.
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
+	@Column(nullable = false, length = 30)
 	private StatusConsulta status;
 
 	@PrePersist
