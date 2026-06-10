@@ -19,6 +19,26 @@ public interface ConsultaRepository extends JpaRepository<Consulta, Long> {
 	// Conta consultas por status para montar indicadores do dashboard.
 	long countByStatus(StatusConsulta status);
 
+	// Conta consultas aplicando filtros opcionais de relatorio.
+	@Query("""
+		SELECT COUNT(c)
+		FROM Consulta c
+		WHERE (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+	""")
+	long countRelatorio(@Param("usuarioId") Long usuarioId);
+
+	// Conta consultas por status aplicando filtros opcionais de relatorio.
+	@Query("""
+		SELECT COUNT(c)
+		FROM Consulta c
+		WHERE c.status = :status
+		AND (:usuarioId IS NULL OR c.usuario.id = :usuarioId)
+	""")
+	long countRelatorioPorStatus(
+		@Param("usuarioId") Long usuarioId,
+		@Param("status") StatusConsulta status
+	);
+
 	// Verifica se ja existe consulta ativa no mesmo intervalo para o dentista.
 	@Query("""
 		SELECT COUNT(c) > 0

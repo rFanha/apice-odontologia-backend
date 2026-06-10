@@ -335,7 +335,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 95. [X] Endpoints de relatorios filtrados ou dashboard implementados.
 
-96. [ ] Filtro por usuario implementado em relatorios.
+96. [X] Filtro por usuario implementado em relatorios.
 
 97. [ ] Filtro por paciente implementado em relatorios.
 
