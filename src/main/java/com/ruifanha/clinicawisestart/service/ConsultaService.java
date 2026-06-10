@@ -10,6 +10,7 @@ import com.ruifanha.clinicawisestart.domain.consulta.Consulta;
 import com.ruifanha.clinicawisestart.domain.consulta.StatusConsulta;
 import com.ruifanha.clinicawisestart.domain.usuario.PerfilUsuario;
 import com.ruifanha.clinicawisestart.domain.usuario.Usuario;
+import com.ruifanha.clinicawisestart.dto.consulta.CancelamentoConsultaRequest;
 import com.ruifanha.clinicawisestart.dto.consulta.ConsultaRequest;
 import com.ruifanha.clinicawisestart.repository.ConsultaRepository;
 import com.ruifanha.clinicawisestart.repository.DentistaRepository;
@@ -49,6 +50,22 @@ public class ConsultaService {
 		Consulta consulta = buscarPorId(id);
 		aplicarDados(consulta, usuarioLogado, consultaRequest, false);
 		return salvar(consulta);
+	}
+
+	@Transactional
+	public Consulta cancelar(Long id, CancelamentoConsultaRequest cancelamentoRequest) {
+		Consulta consulta = buscarPorId(id);
+		validarCancelamentoPermitido(consulta);
+
+		if (cancelamentoRequest == null || cancelamentoRequest.motivoCancelamento() == null
+			|| cancelamentoRequest.motivoCancelamento().isBlank()) {
+			throw new IllegalArgumentException("Informe o motivo para cancelar a consulta.");
+		}
+
+		consulta.setStatus(StatusConsulta.CANCELADA);
+		consulta.setMotivoCancelamento(cancelamentoRequest.motivoCancelamento());
+		validarMotivoCancelamento(consulta);
+		return consultaRepository.save(consulta);
 	}
 
 	@Transactional
@@ -162,6 +179,16 @@ public class ConsultaService {
 
 		if (consultaCancelada && motivoVazio) {
 			throw new IllegalArgumentException("Informe o motivo para cancelar a consulta.");
+		}
+	}
+
+	private void validarCancelamentoPermitido(Consulta consulta) {
+		// Impede transicoes de status que nao fazem sentido para cancelamento.
+		if (StatusConsulta.CANCELADA.equals(consulta.getStatus())) {
+			throw new IllegalArgumentException("Consulta ja esta cancelada.");
+		}
+		if (StatusConsulta.FINALIZADA.equals(consulta.getStatus())) {
+			throw new IllegalArgumentException("Consulta finalizada nao pode ser cancelada.");
 		}
 	}
 

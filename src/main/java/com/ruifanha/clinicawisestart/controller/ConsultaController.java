@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ruifanha.clinicawisestart.domain.usuario.Usuario;
+import com.ruifanha.clinicawisestart.dto.consulta.CancelamentoConsultaRequest;
 import com.ruifanha.clinicawisestart.dto.consulta.ConsultaRequest;
 import com.ruifanha.clinicawisestart.dto.consulta.ConsultaResponse;
 import com.ruifanha.clinicawisestart.service.ConsultaService;
@@ -87,6 +88,18 @@ public class ConsultaController {
 	public void excluir(@PathVariable Long id) {
 		try {
 			consultaService.excluir(id);
+		} catch (IllegalArgumentException exception) {
+			throw converterErro(exception);
+		}
+	}
+
+	@PutMapping("/{id}/cancelar")
+	public ConsultaResponse cancelar(
+		@PathVariable Long id,
+		@RequestBody CancelamentoConsultaRequest cancelamentoRequest
+	) {
+		try {
+			return ConsultaResponse.fromEntity(consultaService.cancelar(id, cancelamentoRequest));
 		} catch (IllegalArgumentException exception) {
 			throw converterErro(exception);
 		}
