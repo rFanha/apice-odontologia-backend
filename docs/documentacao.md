@@ -307,7 +307,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 82. [X] `UsuarioService` criado.
 
-83. [ ] `PacienteService` criado.
+83. [X] `PacienteService` criado.
 
 84. [ ] `DentistaService` criado.
 
