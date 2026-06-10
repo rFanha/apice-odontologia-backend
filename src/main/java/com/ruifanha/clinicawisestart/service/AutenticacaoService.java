@@ -2,6 +2,7 @@ package com.ruifanha.clinicawisestart.service;
 
 import java.time.LocalDateTime;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,15 +10,24 @@ import com.ruifanha.clinicawisestart.domain.usuario.Usuario;
 import com.ruifanha.clinicawisestart.dto.autenticacao.LoginRequest;
 import com.ruifanha.clinicawisestart.dto.autenticacao.LoginResponse;
 import com.ruifanha.clinicawisestart.repository.UsuarioRepository;
+import com.ruifanha.clinicawisestart.security.JwtService;
 
 // Service criado para concentrar as regras iniciais de autenticacao.
 @Service
 public class AutenticacaoService {
 
 	private final UsuarioRepository usuarioRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
 
-	public AutenticacaoService(UsuarioRepository usuarioRepository) {
+	public AutenticacaoService(
+		UsuarioRepository usuarioRepository,
+		PasswordEncoder passwordEncoder,
+		JwtService jwtService
+	) {
 		this.usuarioRepository = usuarioRepository;
+		this.passwordEncoder = passwordEncoder;
+		this.jwtService = jwtService;
 	}
 
 	@Transactional
@@ -34,12 +44,15 @@ public class AutenticacaoService {
 		usuario.setUltimoLogin(LocalDateTime.now());
 		usuarioRepository.save(usuario);
 
+		String token = jwtService.gerarToken(usuario);
+
 		return new LoginResponse(
 			usuario.getId(),
 			usuario.getNome(),
 			usuario.getEmail(),
 			usuario.getPerfil(),
-			usuario.getAtivo()
+			usuario.getAtivo(),
+			token
 		);
 	}
 
@@ -62,8 +75,8 @@ public class AutenticacaoService {
 	}
 
 	private void validarSenha(String senhaInformada, Usuario usuario) {
-		// Compara a senha atual; BCrypt/JWT entram nos itens de seguranca posteriores.
-		if (!senhaInformada.equals(usuario.getSenha())) {
+		// Compara a senha informada com o hash BCrypt armazenado.
+		if (!passwordEncoder.matches(senhaInformada, usuario.getSenha())) {
 			throw new IllegalArgumentException("Email ou senha invalidos.");
 		}
 	}

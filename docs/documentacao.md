@@ -273,7 +273,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 68. [X] Driver Postgres, MySQL ou outro banco relacional adicionado.
 
-69. [ ] Dependencia Spring Security adicionada.
+69. [X] Dependencia Spring Security adicionada.
 
 70. [X] Configuracao de conexao com banco adicionada.
 
@@ -321,7 +321,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 88. [X] Endpoints de autenticacao implementados.
 
-89. [ ] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
+89. [X] Endpoints de usuarios implementados com acesso apenas para `ADMIN`.
 
 90. [ ] Endpoints de pacientes implementados.
 
@@ -345,15 +345,15 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 ### Seguranca
 
-100. [ ] Autenticacao com JWT implementada.
+100. [X] Autenticacao com JWT implementada.
 
-101. [ ] Autorizacao por perfil implementada.
+101. [X] Autorizacao por perfil implementada.
 
-102. [ ] Rotas sensiveis protegidas pelo Spring Security.
+102. [X] Rotas sensiveis protegidas pelo Spring Security.
 
-103. [ ] Senhas armazenadas com hash seguro.
+103. [X] Senhas armazenadas com hash seguro.
 
-104. [ ] Validacao de permissao para `ADMIN` implementada.
+104. [X] Validacao de permissao para `ADMIN` implementada.
 
 105. [ ] Validacao de permissao para `DENTISTA` implementada.
 
