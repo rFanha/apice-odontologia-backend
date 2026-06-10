@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS dentistas (
 -- Cria a tabela de especialidades odontologicas disponiveis para os dentistas.
 CREATE TABLE IF NOT EXISTS especialidades (
 	id BIGSERIAL PRIMARY KEY,
-	nome VARCHAR(255) NOT NULL
+	nome VARCHAR(255) NOT NULL UNIQUE
 );
 
 -- Cria a tabela intermediaria que liga dentistas e especialidades sem duplicidade.

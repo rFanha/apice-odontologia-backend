@@ -87,7 +87,7 @@ public class EspecialidadeService {
 
 	private void validarDuplicidadeNome(Especialidade especialidade) {
 		// Evita cadastro de especialidades com nome ja utilizado por outro registro.
-		especialidadeRepository.findByNome(especialidade.getNome())
+		especialidadeRepository.findFirstByNomeIgnoreCaseOrderByIdAsc(especialidade.getNome())
 			.filter(especialidadeExistente -> !especialidadeExistente.getId().equals(especialidade.getId()))
 			.ifPresent(especialidadeExistente -> {
 				throw new IllegalArgumentException("Ja existe especialidade cadastrada com este nome.");
