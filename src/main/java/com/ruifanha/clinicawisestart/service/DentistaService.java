@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ruifanha.clinicawisestart.domain.dentista.Dentista;
+import com.ruifanha.clinicawisestart.dto.dentista.DentistaRequest;
 import com.ruifanha.clinicawisestart.repository.DentistaRepository;
 
 // Service criado para concentrar regras de negocio relacionadas aos dentistas.
@@ -16,6 +17,26 @@ public class DentistaService {
 
 	public DentistaService(DentistaRepository dentistaRepository) {
 		this.dentistaRepository = dentistaRepository;
+	}
+
+	@Transactional
+	public Dentista criar(DentistaRequest dentistaRequest) {
+		Dentista dentista = new Dentista();
+		aplicarDados(dentista, dentistaRequest);
+		validarDuplicidadeEmail(dentista);
+		validarDuplicidadeCpf(dentista);
+		validarDuplicidadeCro(dentista);
+		return dentistaRepository.save(dentista);
+	}
+
+	@Transactional
+	public Dentista atualizar(Long id, DentistaRequest dentistaRequest) {
+		Dentista dentista = buscarPorId(id);
+		aplicarDados(dentista, dentistaRequest);
+		validarDuplicidadeEmail(dentista);
+		validarDuplicidadeCpf(dentista);
+		validarDuplicidadeCro(dentista);
+		return dentistaRepository.save(dentista);
 	}
 
 	@Transactional
@@ -30,6 +51,15 @@ public class DentistaService {
 	public List<Dentista> listarTodos() {
 		// Lista todos os dentistas para apoiar telas de cadastro e manutencao.
 		return dentistaRepository.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Dentista> listarTodos(Boolean ativo) {
+		// Permite filtrar dentistas ativos quando o parametro for informado.
+		if (ativo != null) {
+			return dentistaRepository.findByAtivo(ativo);
+		}
+		return listarTodos();
 	}
 
 	@Transactional(readOnly = true)
@@ -50,6 +80,19 @@ public class DentistaService {
 		// Confirma que o dentista existe antes de solicitar a exclusao.
 		Dentista dentista = buscarPorId(id);
 		dentistaRepository.delete(dentista);
+	}
+
+	private void aplicarDados(Dentista dentista, DentistaRequest dentistaRequest) {
+		// Copia os dados recebidos para a entidade antes de salvar.
+		if (dentistaRequest == null) {
+			throw new IllegalArgumentException("Dados do dentista sao obrigatorios.");
+		}
+
+		dentista.setNome(dentistaRequest.nome());
+		dentista.setCpf(dentistaRequest.cpf());
+		dentista.setEmail(dentistaRequest.email());
+		dentista.setCro(dentistaRequest.cro());
+		dentista.setAtivo(dentistaRequest.ativo());
 	}
 
 	private void validarDuplicidadeEmail(Dentista dentista) {
