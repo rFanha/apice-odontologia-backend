@@ -299,7 +299,7 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 79. [X] `DentistaRepository` criado.
 
-80. [ ] `EspecialidadeRepository` criado.
+80. [X] `EspecialidadeRepository` criado.
 
 81. [X] `ConsultaRepository` criado.
 
