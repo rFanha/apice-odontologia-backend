@@ -1,5 +1,7 @@
 package com.ruifanha.clinicawisestart.dto.dentista;
 
+import java.util.List;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -25,6 +27,10 @@ public record DentistaRequest(
 	String cro,
 
 	@NotNull(message = "Status ativo e obrigatorio.")
-	Boolean ativo
+	Boolean ativo,
+
+	Long especialidadeId,
+
+	List<Long> especialidadeIds
 ) {
 }
