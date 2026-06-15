@@ -78,3 +78,15 @@ CREATE TABLE IF NOT EXISTS consultas (
 	CONSTRAINT ck_consultas_motivo_cancelamento
 		CHECK (status <> 'CANCELADA' OR motivo_cancelamento IS NOT NULL)
 );
+
+-- Cria a tabela de leads recebidos pelo formulario de agendamento da landing page.
+CREATE TABLE IF NOT EXISTS leads (
+	id BIGSERIAL PRIMARY KEY,
+	nome VARCHAR(255) NOT NULL,
+	telefone VARCHAR(30) NOT NULL,
+	email VARCHAR(255),
+	especialidade VARCHAR(255),
+	mensagem TEXT,
+	data_criacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	lido BOOLEAN NOT NULL DEFAULT FALSE
+);
