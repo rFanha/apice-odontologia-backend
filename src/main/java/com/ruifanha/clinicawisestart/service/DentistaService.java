@@ -118,6 +118,7 @@ public class DentistaService {
 
 	private void sincronizarEspecialidades(Dentista dentista, List<Long> ids) {
 		dentistaEspecialidadeRepository.deleteByDentista(dentista);
+		dentistaEspecialidadeRepository.flush();
 		if (ids.isEmpty()) {
 			return;
 		}
