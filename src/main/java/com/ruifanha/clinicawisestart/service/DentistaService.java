@@ -1,22 +1,35 @@
 package com.ruifanha.clinicawisestart.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ruifanha.clinicawisestart.domain.dentista.Dentista;
+import com.ruifanha.clinicawisestart.domain.dentista.DentistaEspecialidade;
+import com.ruifanha.clinicawisestart.domain.especialidade.Especialidade;
 import com.ruifanha.clinicawisestart.dto.dentista.DentistaRequest;
+import com.ruifanha.clinicawisestart.repository.DentistaEspecialidadeRepository;
 import com.ruifanha.clinicawisestart.repository.DentistaRepository;
+import com.ruifanha.clinicawisestart.repository.EspecialidadeRepository;
 
 // Service criado para concentrar regras de negocio relacionadas aos dentistas.
 @Service
 public class DentistaService {
 
 	private final DentistaRepository dentistaRepository;
+	private final DentistaEspecialidadeRepository dentistaEspecialidadeRepository;
+	private final EspecialidadeRepository especialidadeRepository;
 
-	public DentistaService(DentistaRepository dentistaRepository) {
+	public DentistaService(
+		DentistaRepository dentistaRepository,
+		DentistaEspecialidadeRepository dentistaEspecialidadeRepository,
+		EspecialidadeRepository especialidadeRepository
+	) {
 		this.dentistaRepository = dentistaRepository;
+		this.dentistaEspecialidadeRepository = dentistaEspecialidadeRepository;
+		this.especialidadeRepository = especialidadeRepository;
 	}
 
 	@Transactional
@@ -26,7 +39,9 @@ public class DentistaService {
 		validarDuplicidadeEmail(dentista);
 		validarDuplicidadeCpf(dentista);
 		validarDuplicidadeCro(dentista);
-		return dentistaRepository.save(dentista);
+		Dentista salvo = dentistaRepository.save(dentista);
+		sincronizarEspecialidades(salvo, resolverIds(dentistaRequest));
+		return dentistaRepository.findByIdComEspecialidades(salvo.getId()).orElse(salvo);
 	}
 
 	@Transactional
@@ -36,7 +51,9 @@ public class DentistaService {
 		validarDuplicidadeEmail(dentista);
 		validarDuplicidadeCpf(dentista);
 		validarDuplicidadeCro(dentista);
-		return dentistaRepository.save(dentista);
+		Dentista salvo = dentistaRepository.save(dentista);
+		sincronizarEspecialidades(salvo, resolverIds(dentistaRequest));
+		return dentistaRepository.findByIdComEspecialidades(salvo.getId()).orElse(salvo);
 	}
 
 	@Transactional
@@ -49,41 +66,35 @@ public class DentistaService {
 
 	@Transactional(readOnly = true)
 	public List<Dentista> listarTodos() {
-		// Lista todos os dentistas para apoiar telas de cadastro e manutencao.
-		return dentistaRepository.findAll();
+		return dentistaRepository.findAllComEspecialidades();
 	}
 
 	@Transactional(readOnly = true)
 	public List<Dentista> listarTodos(Boolean ativo) {
-		// Permite filtrar dentistas ativos quando o parametro for informado.
 		if (ativo != null) {
-			return dentistaRepository.findByAtivo(ativo);
+			return dentistaRepository.findByAtivoComEspecialidades(ativo);
 		}
 		return listarTodos();
 	}
 
 	@Transactional(readOnly = true)
 	public List<Dentista> listarAtivos() {
-		// Lista apenas dentistas ativos para uso em agendamentos.
-		return dentistaRepository.findByAtivo(Boolean.TRUE);
+		return dentistaRepository.findByAtivoComEspecialidades(Boolean.TRUE);
 	}
 
 	@Transactional(readOnly = true)
 	public Dentista buscarPorId(Long id) {
-		// Centraliza a busca por id para manter uma mensagem padronizada.
-		return dentistaRepository.findById(id)
+		return dentistaRepository.findByIdComEspecialidades(id)
 			.orElseThrow(() -> new IllegalArgumentException("Dentista nao encontrado."));
 	}
 
 	@Transactional
 	public void excluir(Long id) {
-		// Confirma que o dentista existe antes de solicitar a exclusao.
 		Dentista dentista = buscarPorId(id);
 		dentistaRepository.delete(dentista);
 	}
 
 	private void aplicarDados(Dentista dentista, DentistaRequest dentistaRequest) {
-		// Copia os dados recebidos para a entidade antes de salvar.
 		if (dentistaRequest == null) {
 			throw new IllegalArgumentException("Dados do dentista sao obrigatorios.");
 		}
@@ -95,8 +106,34 @@ public class DentistaService {
 		dentista.setAtivo(dentistaRequest.ativo());
 	}
 
+	private List<Long> resolverIds(DentistaRequest req) {
+		if (req.especialidadeIds() != null && !req.especialidadeIds().isEmpty()) {
+			return req.especialidadeIds();
+		}
+		if (req.especialidadeId() != null) {
+			return List.of(req.especialidadeId());
+		}
+		return List.of();
+	}
+
+	private void sincronizarEspecialidades(Dentista dentista, List<Long> ids) {
+		dentistaEspecialidadeRepository.deleteByDentista(dentista);
+		if (ids.isEmpty()) {
+			return;
+		}
+		List<DentistaEspecialidade> novas = new ArrayList<>();
+		for (Long espId : ids) {
+			Especialidade especialidade = especialidadeRepository.findById(espId)
+				.orElseThrow(() -> new IllegalArgumentException("Especialidade nao encontrada: " + espId));
+			DentistaEspecialidade de = new DentistaEspecialidade();
+			de.setDentista(dentista);
+			de.setEspecialidade(especialidade);
+			novas.add(de);
+		}
+		dentistaEspecialidadeRepository.saveAll(novas);
+	}
+
 	private void validarDuplicidadeEmail(Dentista dentista) {
-		// Evita cadastro de dentistas com email ja utilizado por outro registro.
 		dentistaRepository.findByEmail(dentista.getEmail())
 			.filter(dentistaExistente -> !dentistaExistente.getId().equals(dentista.getId()))
 			.ifPresent(dentistaExistente -> {
@@ -105,7 +142,6 @@ public class DentistaService {
 	}
 
 	private void validarDuplicidadeCpf(Dentista dentista) {
-		// Evita cadastro de dentistas com CPF ja utilizado por outro registro.
 		dentistaRepository.findByCpf(dentista.getCpf())
 			.filter(dentistaExistente -> !dentistaExistente.getId().equals(dentista.getId()))
 			.ifPresent(dentistaExistente -> {
@@ -114,7 +150,6 @@ public class DentistaService {
 	}
 
 	private void validarDuplicidadeCro(Dentista dentista) {
-		// Evita cadastro de dentistas com CRO ja utilizado por outro registro.
 		dentistaRepository.findByCro(dentista.getCro())
 			.filter(dentistaExistente -> !dentistaExistente.getId().equals(dentista.getId()))
 			.ifPresent(dentistaExistente -> {
