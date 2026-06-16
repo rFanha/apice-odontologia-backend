@@ -32,6 +32,10 @@
     {
       "key": "consultaId",
       "value": "1"
+    },
+    {
+      "key": "leadId",
+      "value": "1"
     }
   ],
   "auth": {
@@ -230,7 +234,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nome\": \"Dra. Laura Nunes\",\n  \"cpf\": \"88888888888\",\n  \"email\": \"laura.nunes@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-24680\",\n  \"ativo\": true\n}"
+          "raw": "{\n  \"nome\": \"Dra. Laura Nunes\",\n  \"cpf\": \"88888888888\",\n  \"email\": \"laura.nunes@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-24680\",\n  \"ativo\": true,\n  \"especialidadeId\": 1,\n  \"especialidadeIds\": [1]\n}"
         },
         "url": "{{baseUrl}}/dentistas"
       }
@@ -247,7 +251,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"nome\": \"Dra. Marina Lopes\",\n  \"cpf\": \"44444444444\",\n  \"email\": \"marina.dentista@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-12345\",\n  \"ativo\": true\n}"
+          "raw": "{\n  \"nome\": \"Dra. Marina Lopes\",\n  \"cpf\": \"44444444444\",\n  \"email\": \"marina.dentista@apiceodontologia.com.br\",\n  \"cro\": \"CRO-SP-12345\",\n  \"ativo\": true,\n  \"especialidadeId\": 1,\n  \"especialidadeIds\": [1, 2]\n}"
         },
         "url": "{{baseUrl}}/dentistas/{{dentistaId}}"
       }
@@ -264,6 +268,13 @@
       "request": {
         "method": "GET",
         "url": "{{baseUrl}}/especialidades"
+      }
+    },
+    {
+      "name": "Especialidades - Listar Com Filtro Nome",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/especialidades?nome=Ortodontia"
       }
     },
     {
@@ -347,7 +358,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao de rotina\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-06-15T09:00:00\",\n  \"dataFim\": \"2026-06-15T10:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao de rotina\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-07-01T09:00:00\",\n  \"dataFim\": \"2026-07-01T10:00:00\",\n  \"status\": \"AGENDADA\"\n}"
         },
         "url": "{{baseUrl}}/consultas"
       }
@@ -364,7 +375,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao atualizada\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-06-15T11:00:00\",\n  \"dataFim\": \"2026-06-15T12:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Avaliacao atualizada\",\n  \"motivoCancelamento\": null,\n  \"dataInicio\": \"2026-07-01T11:00:00\",\n  \"dataFim\": \"2026-07-01T12:00:00\",\n  \"status\": \"AGENDADA\"\n}"
         },
         "url": "{{baseUrl}}/consultas/{{consultaId}}"
       }
@@ -394,6 +405,47 @@
       }
     },
     {
+      "name": "Leads - Criar",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Maria Oliveira\",\n  \"telefone\": \"(11) 97777-5555\",\n  \"email\": \"maria.oliveira@email.com\",\n  \"especialidade\": \"Ortodontia\",\n  \"mensagem\": \"Gostaria de agendar uma avaliacao.\"\n}"
+        },
+        "url": "{{baseUrl}}/leads"
+      }
+    },
+    {
+      "name": "Leads - Listar",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/leads"
+      }
+    },
+    {
+      "name": "Leads - Listar Nao Lidos",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/leads?lido=false"
+      }
+    },
+    {
+      "name": "Leads - Marcar Como Lido",
+      "request": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/leads/{{leadId}}/lido"
+      }
+    },
+    {
       "name": "Relatorios - Dashboard",
       "request": {
         "method": "GET",
@@ -404,7 +456,7 @@
       "name": "Relatorios - Dashboard Com Filtros",
       "request": {
         "method": "GET",
-        "url": "{{baseUrl}}/relatorios/dashboard?usuarioId={{usuarioId}}&pacienteId={{pacienteId}}&especialidadeId={{especialidadeId}}&dataInicio=2026-06-01T00:00:00&dataFim=2026-06-30T23:59:59"
+        "url": "{{baseUrl}}/relatorios/dashboard?usuarioId={{usuarioId}}&pacienteId={{pacienteId}}&especialidadeId={{especialidadeId}}&dataInicio=2026-07-01T00:00:00&dataFim=2026-07-31T23:59:59"
       }
     },
     {
@@ -436,7 +488,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Periodo invalido\",\n  \"dataInicio\": \"2026-06-15T10:00:00\",\n  \"dataFim\": \"2026-06-15T09:00:00\",\n  \"status\": \"AGENDADA\"\n}"
+          "raw": "{\n  \"pacienteId\": {{pacienteId}},\n  \"dentistaId\": {{dentistaId}},\n  \"descricao\": \"Periodo invalido\",\n  \"dataInicio\": \"2026-07-01T10:00:00\",\n  \"dataFim\": \"2026-07-01T09:00:00\",\n  \"status\": \"AGENDADA\"\n}"
         },
         "url": "{{baseUrl}}/consultas"
       }
