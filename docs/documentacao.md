@@ -231,6 +231,24 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 51. [X] Campo `status` criado como texto, por exemplo `AGENDADA`, `CANCELADA` ou `FINALIZADA`.
 
+### Tabela `leads`
+
+292. [X] Campo `id` criado como chave primaria com auto incremento.
+
+293. [X] Campo `nome` criado como texto obrigatorio.
+
+294. [X] Campo `telefone` criado como texto obrigatorio.
+
+295. [X] Campo `email` criado como texto opcional.
+
+296. [X] Campo `especialidade` criado como texto opcional.
+
+297. [X] Campo `mensagem` criado como texto opcional.
+
+298. [X] Campo `data_criacao` criado como data e hora do registro.
+
+299. [X] Campo `lido` criado como booleano com valor padrao `false`.
+
 ### Scripts SQL
 
 52. [X] Script DDL criado para inicializacao das tabelas.
@@ -289,6 +307,8 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 75. [X] Entidade `Consulta` mapeada.
 
+300. [X] Entidade `Lead` mapeada.
+
 76. [X] Relacionamentos entre entidades mapeados corretamente.
 
 ### Repositories
@@ -303,6 +323,8 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 
 81. [X] `ConsultaRepository` criado.
 
+301. [X] `LeadRepository` criado.
+
 ### Services
 
 82. [X] `UsuarioService` criado.
@@ -314,6 +336,8 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 85. [X] `EspecialidadeService` criado.
 
 86. [X] `ConsultaService` criado.
+
+302. [X] `LeadService` criado.
 
 87. [X] Regras de negocio implementadas nos services.
 
@@ -332,6 +356,8 @@ O checklist atual está **alinhado com o anexo** na maior parte dos itens.
 93. [X] Endpoints de consultas implementados.
 
 94. [X] Endpoint de cancelamento de consultas implementado.
+
+303. [X] Endpoints de leads implementados (criacao publica sem autenticacao, listagem com filtro `lido`, marcar como lido via PATCH).
 
 95. [X] Endpoints de relatorios filtrados ou dashboard implementados.
 
